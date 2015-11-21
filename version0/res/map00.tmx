@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="20" tileheight="32" nextobjectid="1">
  <tileset firstgid="1" name="playBG" tilewidth="20" tileheight="32" tilecount="950">
-  <image source="../Dropbox/github/EECS493/EECS493_Parkour_Game/version0/res/playBG.png" width="1000" height="630"/>
+  <image source="playBG.png" width="1000" height="630"/>
  </tileset>
  <layer name="块层 1" width="50" height="50">
   <data encoding="base64" compression="zlib">

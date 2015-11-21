@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="18" tilewidth="20" tileheight="32" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="18" tilewidth="20" tileheight="32" nextobjectid="8">
  <tileset firstgid="1" name="bg1" tilewidth="20" tileheight="32" tilecount="760">
   <image source="bg1.jpg" width="800" height="612"/>
  </tileset>
@@ -8,4 +8,13 @@
    eJxN1UMQGAYUBNDYtm3btm3btm3btm3bVhu2sZ02Tvoyk0Nn/ps97t5+wAABAgQiMEEISjCCE4KQhCI0YQhLOMITgYhEIjJRiEo0ohODmMQiNnGISzzik4CEJCIxSUhKMpKTgpSkIjVpSEs60pOBjGQiM1nISjayk4Oc5CI3echLPvJTgIIUojBFKEoxilOCkpSiNGUoSznKU4GKVKIyVahKNapTg5rUojZ1qEs96tOAhjSiMU1oSjOa04KWtKI1bWhLO9rTgY50ojNd6Eo3utODnvSiN33oSz/6M4CBDGIwQxjKMIYzgpGMYjRjGMs4xjOBiUxiMlOYyjSmM4OZzGI2c5jLPOazgIUsYjFLWMoylrOClaxiNWtYyzrWs4GNbGIzW9jKNrazg53sYjd72Ms+9nOAgxziMEc4yjGOc4KTnOI0ZzjLOc5zgYtc4jJXuMo1/uBPrnODm9ziNnf4i7+5yz3u84CHPOIxT3jKM57zgpe84jVveMs73vOBf/iXj3ziM1/4yje+84OfBAjoCERgghCUYAQnBCEJRWjCEJZwhCcCEYlEZKIQlWhEJwYxiUVs4hCXeMQnAQlJRGKSkJRkJCcFKUlFatKQlnSkJwMZyURmspCVbGQnBznJRW7ykJd85KcABSlEYYpQlGIUpwQlKUVpylCWcpSnAhWpRGWqUJVqVKcGNalFbepQl3rUpwENaURjmtCUZjSnBS1pRWva0JZ2tKcDHelEZ7rQlW50pwc96UVv+tCXfvRnAAMZxGCGMJRhDGcEIxnFaMYwlnGMZwITmcRkpjCVaUxnBjOZxWzmMJd5zGcBC1nEYpawlGUsZwUrWcVq1rCWdaxnAxvZxGa2sJVtbGcHO9nFbvawl33s5wAHOcRhjnCUYxznBCc5xWnOcJZznOcCF7nEZa5wlWv8wZ9c5wY3ucVt7vyv4y73uM8DHvKIxzzhKc94zgte8orXvOEt73jPB/7hXz7yic984Svf+M4PfvLr8QckEIEJ8jt/yfBbSEIRmjCEJRzhiUBEIhGZKEQlGtGJQUxiEZs4xCUe8UlAQhKRmCQkJRnJSUFKUpGaNKQlHel/78tIJjKThaxkIzs5yEkucpOHvOQjPwUoSCEKU4SiFKM4JShJKUpThrKUozwVqEglKlOFqlSjOjWoSS1qU4e61KM+DWhIIxrThKY0ozktaEkrWtOGtrSjPR3oSCc604WudKM7PehJL3rTh770oz8DGMggBjOEoQxjOCMYyShGM4axjGM8E5jIJCYzhalMYzozmMksZjOHucxjPgtYyCIWs4SlLGM5K1jJKlazhrWsYz0b2MgmNrOFrWxjOzvYyS52s4e97GM/BzjIIQ5zhKMc4zgnOMkpTnOGs5zjPBf4D4U1VrQ=
   </data>
  </layer>
+ <objectgroup name="coin">
+  <object id="1" x="374" y="338"/>
+  <object id="2" x="562" y="332" width="1"/>
+  <object id="3" x="562" y="327"/>
+  <object id="4" x="483" y="226"/>
+  <object id="5" x="521" y="185"/>
+  <object id="6" x="590" y="158"/>
+  <object id="7" x="438" y="280"/>
+ </objectgroup>
 </map>

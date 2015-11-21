@@ -6,7 +6,7 @@ var res = {
     runner_png  : "res/nana.png",
     runner_plist : "res/nana.plist",
 
-    map_png : "res/bg1.jpg",
+    map_png : "res/base.jpg",
     map00_tmx: "res/map00.tmx",
     map01_tmx: "res/map01.tmx",
 

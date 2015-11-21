@@ -18,6 +18,8 @@ var AnimationLayer = cc.Layer.extend({
         // Parallax ratio and offset
         this.addChild(this._debugNode, 10);
 
+        this._debugNode.setVisible(false);
+
     },
 
     // avoid runner running out of screen

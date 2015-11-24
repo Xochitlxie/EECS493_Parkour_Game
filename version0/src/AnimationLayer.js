@@ -1,4 +1,14 @@
 
+	
+	// define enum for runner status
+
+	if(typeof RunnerStat == "undefined") {
+    var RunnerStat = {};
+    RunnerStat.running = 0;
+    RunnerStat.jumpUp = 1;
+    RunnerStat.jumpDown = 2;
+	}
+	
 var AnimationLayer = cc.Layer.extend({
 
     spriteSheet:null,
@@ -8,7 +18,12 @@ var AnimationLayer = cc.Layer.extend({
     shape:null,
 
     space:null,
-
+	
+	jumpUpAction:null,
+	jumpDownAction:null,
+	
+	stat: RunnerStat.running,// init with running status
+	
     ctor:function (space) {
         this._super();
         this.space = space;
@@ -30,6 +45,73 @@ var AnimationLayer = cc.Layer.extend({
 	update: function() {
 		var statusLayer = this.getParent().getParent().getChildByTag(TagOfLayer.Status);
 		statusLayer.updateMeter(this.sprite.getPositionX() - g_runnerStartX);
+		
+		//in the update method of AnimationLayer
+		// check and update runner stat
+        var vel = this.body.getVel();
+        if (this.stat == RunnerStat.jumpUp) {
+            if (vel.y < 0.1) {
+                this.stat = RunnerStat.jumpDown;
+                this.sprite.stopAllActions();
+                this.sprite.runAction(this.jumpDownAction);
+            }
+        } else if (this.stat == RunnerStat.jumpDown) {
+            if (vel.y == 0) {
+                this.stat = RunnerStat.running;
+                this.sprite.stopAllActions();
+                this.sprite.runAction(this.runningAction);
+            }
+        }
+	},
+	
+	jump:function () {
+       cc.log("jump");
+       if (this.stat == RunnerStat.running) {
+           this.body.applyImpulse(cp.v(0, 250), cp.v(0, 0));
+           this.stat = RunnerStat.jumpUp;
+           this.sprite.stopAllActions();
+		   this.sprite.runAction(this.jumpUpAction);
+		   //this.sprite.runAction(this.jumpDownAction);
+       }
+	},
+	
+	initAction: function() {
+		// init runningAction
+        var animFrames = [];
+        for (var i = 1; i < 3; i++) {
+            var str = "run_Nana_mini_" + i + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            animFrames.push(frame);
+        }
+
+        var animation = cc.Animation.create(animFrames, 0.1);
+        animation.setDelayPerUnit(1/14);
+        this.runningAction = cc.RepeatForever.create(cc.Animate.create(animation));
+		this.runningAction.retain();
+ 
+		// init jumpUpAction
+		animFrames = [];
+		for (var i = 1; i < 3; i++) {
+			var str = "run_Nana_mini" + i + ".png";
+			var frame = cc.spriteFrameCache.getSpriteFrame(str);
+			animFrames.push(frame);
+		}
+ 
+		animation = new cc.Animation.create(animFrames, 0.2);
+		this.jumpUpAction = cc.RepeatForever.create(cc.Animate.create(animation));
+		this.jumpUpAction.retain();
+ 
+		// init jumpDownAction
+		animFrames = [];
+		for (var i = 1; i < 3; i++) {
+			var str = "run_Nana_mini" + i + ".png";
+			var frame = cc.spriteFrameCache.getSpriteFrame(str);
+			animFrames.push(frame);
+		}
+ 
+		animation = new cc.Animation.create(animFrames, 0.3);
+		this.jumpDownAction = cc.RepeatForever.create(cc.Animate.create(animation));
+		this.jumpDownAction.retain();  
 	},
 	
     init:function () {
@@ -41,7 +123,19 @@ var AnimationLayer = cc.Layer.extend({
         this.spriteSheet = cc.SpriteBatchNode.create(res.runner_png);
         this.addChild(this.spriteSheet);
 
-        // init runningAction
+		this.initAction();
+		
+		cc.eventManager.addListener({
+			event: cc.EventListener.KEYBOARD,
+			onKeyPressed:  function(keycode, event){
+			cc.log("Key with keycode " + keycode + " pressed");  
+			event.getCurrentTarget().jump();
+			},  
+			onKeyReleased: function(keycode, event){
+			cc.log("Key with keycode " + keycode + " released"); 
+			}  
+        }, this);  
+    /*    // init runningAction
         var animFrames = [];
         for (var i = 1; i < 3; i++) {
             var str = "run_Nana_mini_" + i + ".png";
@@ -52,9 +146,9 @@ var AnimationLayer = cc.Layer.extend({
         var animation = cc.Animation.create(animFrames, 0.1);
         animation.setDelayPerUnit(1/14);
         this.runningAction = cc.RepeatForever.create(cc.Animate.create(animation));
-        
+	*/	
         this.sprite = cc.PhysicsSprite.create('#run_Nana_mini_1.png');
-
+		
         var contentSize = this.sprite.getContentSize();
 
         this.body = new cp.Body(1, cp.momentForBox(1, contentSize.width, contentSize.height));
@@ -98,5 +192,12 @@ var AnimationLayer = cc.Layer.extend({
         // var actionTo = cc.MoveTo.create(2, cc.p(300, 85));
         // spriteRunner.runAction(cc.Sequence.create(actionTo));
         // this.addChild(spriteRunner);
-    }
+    },
+	
+	onExit:function() {
+    this.runningAction.release();
+    this.jumpUpAction.release();
+    this.jumpDownAction.release();
+    this._super();
+	}
 });

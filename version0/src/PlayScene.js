@@ -73,7 +73,7 @@ var PlayScene = cc.Scene.extend({
 		this.scheduleUpdate();
 		
 	},
-
+	
 	update:function (dt) {
         // chipmunk step
         this.space.step(dt);

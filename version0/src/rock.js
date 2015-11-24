@@ -15,12 +15,14 @@ var Rock = cc.Class.extend({
      * @param {cp.Space *}
      * @param {cc.p}
      */
-    ctor:function (spriteSheet, space, posX) {
+    ctor:function (spriteSheet, space, pos) {
         this.space = space;
  
         this.sprite = cc.PhysicsSprite.create("#rock.png");
+
         var body = new cp.StaticBody();
-        body.setPos(cc.p(posX, this.sprite.getContentSize().height / 2 + g_groundHight));
+        body.setPos(pos);
+        //body.setPos(cc.p(posX, this.sprite.getContentSize().height+ g_groundHight));
         this.sprite.setBody(body);
  
         this.shape = new cp.BoxShape(body,

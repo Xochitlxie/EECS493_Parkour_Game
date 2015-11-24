@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="77" height="19" tilewidth="20" tileheight="32" nextobjectid="10">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="77" height="19" tilewidth="20" tileheight="32" nextobjectid="16">
  <tileset firstgid="1" name="base" tilewidth="20" tileheight="32" tilecount="2185">
   <image source="base.jpg" width="2313" height="630"/>
  </tileset>
@@ -10,15 +10,14 @@
  </layer>
  <objectgroup name="coin">
   <object id="1" x="653" y="464" height="1"/>
-  <object id="2" x="651" y="493"/>
-  <object id="3" x="408" y="477"/>
+  <object id="11" x="1044.07" y="484.207"/>
+  <object id="12" x="943.824" y="484.207"/>
+  <object id="13" x="839.796" y="480.424"/>
+  <object id="14" x="750.898" y="480.424"/>
  </objectgroup>
  <objectgroup name="rock">
-  <object id="4" x="923" y="443"/>
-  <object id="5" x="923" y="394"/>
-  <object id="6" x="923" y="319"/>
-  <object id="7" x="931" y="541"/>
-  <object id="8" x="926" y="504"/>
   <object id="9" x="359" y="197" height="1"/>
+  <object id="10" x="1201.06" y="429.355"/>
+  <object id="15" x="1204.84" y="508.795"/>
  </objectgroup>
 </map>

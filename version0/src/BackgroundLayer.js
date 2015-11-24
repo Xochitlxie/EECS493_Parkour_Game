@@ -67,8 +67,8 @@ var BackgroundLayer = cc.Layer.extend({
        var rockArray = rockGroup.getObjects();
        for (var i = 0; i < rockArray.length; i++) {
            var rock = new Rock(this.spriteSheet,
-               this.space,
-               rockArray[i]["x"] + this.mapWidth * mapIndex);
+               this.space,cc.p(rockArray[i]["x"] + this.mapWidth * mapIndex,rockArray[i]["y"]));
+               //rockArray[i]["x"] + this.mapWidth * mapIndex);
            rock.mapIndex = mapIndex;
            this.objects.push(rock);
        }

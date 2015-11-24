@@ -5,7 +5,11 @@ var res = {
     PlayBG_png  : "res/playBG.png",
     runner_png  : "res/nana.png",
     runner_plist : "res/nana.plist",
-
+	
+	background_ogg : "res/background.ogg",
+	//jump_mp3 : "res/jump.mp3",
+	pickup_coin_wav : "res/pickup_coin.wav",
+	
     map_png : "res/base.jpg",
     map00_tmx: "res/map00.tmx",
     map01_tmx: "res/map01.tmx",
@@ -30,6 +34,10 @@ var g_resources = [
     res.map_png,
     res.map00_tmx,
     res.map01_tmx,
+	
+	res.background_ogg,
+	//res.jump_mp3,
+	 res.pickup_coin_wav,
 
     res.background_png,
     res.background_plist

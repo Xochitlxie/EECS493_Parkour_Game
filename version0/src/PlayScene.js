@@ -31,10 +31,15 @@ var PlayScene = cc.Scene.extend({
         this.shapesToRemove.push(shapes[1]);
 		var statusLayer = this.getChildByTag(TagOfLayer.Status);
 		statusLayer.addCoin(1);
+		
+		cc.audioEngine.playEffect(res.pickup_coin_wav);
+		
     },
 
     collisionRockBegin:function (arbiter, space) {
         cc.log("==game over");
+		
+		cc.audioEngine.stopMusic();
     },
 
 
@@ -59,6 +64,10 @@ var PlayScene = cc.Scene.extend({
   //       this.addChild(new StatusLayer());
 
         this.scheduleUpdate();
+		
+		cc.audioEngine.playMusic(res.background_ogg, true);
+ 
+		this.scheduleUpdate();
 		
 	},
 

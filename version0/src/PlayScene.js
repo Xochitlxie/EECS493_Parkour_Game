@@ -38,8 +38,11 @@ var PlayScene = cc.Scene.extend({
 
     collisionRockBegin:function (arbiter, space) {
         cc.log("==game over");
-		
+
 		cc.audioEngine.stopMusic();
+
+		cc.director.pause();
+        this.addChild(new GameOverLayer());    
     },
 
 

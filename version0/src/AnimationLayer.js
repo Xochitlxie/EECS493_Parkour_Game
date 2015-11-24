@@ -27,6 +27,11 @@ var AnimationLayer = cc.Layer.extend({
         return this.sprite.getPositionX() - g_runnerStartX;
     },
 
+	update: function() {
+		var statusLayer = this.getParent().getParent().getChildByTag(TagOfLayer.Status);
+		statusLayer.updateMeter(this.sprite.getPositionX() - g_runnerStartX);
+	},
+	
     init:function () {
 
         this._super();

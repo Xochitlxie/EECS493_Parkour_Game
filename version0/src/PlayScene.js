@@ -29,6 +29,8 @@ var PlayScene = cc.Scene.extend({
         var shapes = arbiter.getShapes();
         // shapes[0] is runner
         this.shapesToRemove.push(shapes[1]);
+		var statusLayer = this.getChildByTag(TagOfLayer.Status);
+		statusLayer.addCoin(1);
     },
 
     collisionRockBegin:function (arbiter, space) {
@@ -72,6 +74,8 @@ var PlayScene = cc.Scene.extend({
 
         var animationLayer = this.gameLayer.getChildByTag(TagOfLayer.Animation);
 	    var eyeX = animationLayer.getEyeX();
+		
+		animationLayer.update();
 	 
 	    this.gameLayer.setPosition(cc.p(-eyeX,0));
 	}

@@ -62,16 +62,16 @@ var BackgroundLayer = cc.Layer.extend({
            this.objects.push(coin);
        }
  
-       // add rock -- no rock yet
-       // var rockGroup = map.getObjectGroup("rock");
-       // var rockArray = rockGroup.getObjects();
-       // for (var i = 0; i < rockArray.length; i++) {
-       //     var rock = new Rock(this.spriteSheet,
-       //         this.space,
-       //         rockArray[i]["x"] + this.mapWidth * mapIndex);
-       //     rock.mapIndex = mapIndex;
-       //     this.objects.push(rock);
-       // }
+       //add rock 
+       var rockGroup = map.getObjectGroup("rock");
+       var rockArray = rockGroup.getObjects();
+       for (var i = 0; i < rockArray.length; i++) {
+           var rock = new Rock(this.spriteSheet,
+               this.space,
+               rockArray[i]["x"] + this.mapWidth * mapIndex);
+           rock.mapIndex = mapIndex;
+           this.objects.push(rock);
+       }
     },
 
     removeObjects:function (mapIndex) {  // change later

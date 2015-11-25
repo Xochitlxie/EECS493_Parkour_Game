@@ -7,6 +7,7 @@ var res = {
     runner_plist : "res/nana.plist",
     restart_n_png : "res/nana_enter.png",
     restart_s_png : "res/slider.png",
+    demo_png : "res/gift3.png",
 	
 	background_ogg : "res/background.ogg",
 	//jump_mp3 : "res/jump.mp3",
@@ -38,6 +39,7 @@ var g_resources = [
     res.map01_tmx,
     res.restart_n_png,
     res.restart_s_png,
+    res.demo_png,
 	
 	res.background_ogg,
 	//res.jump_mp3,

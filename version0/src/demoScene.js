@@ -1,5 +1,5 @@
 
-var PlayScene = cc.Scene.extend({
+var demoScene = cc.Scene.extend({
 
 	space:null,
 	shapeToRemove : [],
@@ -9,7 +9,7 @@ var PlayScene = cc.Scene.extend({
 	initPhysics : function() {
 	    //1. new space object 
 	    this.space = new cp.Space();
-	    //2. setup the  Gravity
+	    //2. setup the  Gravityd
 	    this.space.gravity = cp.v(0, -350);
 	 
 	    // 3. set up Walls
@@ -94,7 +94,3 @@ var PlayScene = cc.Scene.extend({
 	}
 
 })
-
-
-
-

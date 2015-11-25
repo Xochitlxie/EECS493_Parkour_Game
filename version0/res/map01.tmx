@@ -17,7 +17,6 @@
  </objectgroup>
  <objectgroup name="rock">
   <object id="9" x="359" y="197" height="1"/>
-  <object id="10" x="1201.06" y="429.355"/>
-  <object id="15" x="1204.84" y="508.795"/>
+  <object id="10" x="1201.06" y="552.298"/>
  </objectgroup>
 </map>

@@ -1,11 +1,11 @@
 var res = {
     helloBG_png : "res/Login.jpg",
-    start_n_png : "res/gift1.png",
+    start_n_png : "res/nana_enter.png",
     start_s_png : "res/slider.png",
     PlayBG_png  : "res/playBG.png",
     runner_png  : "res/nana.png",
     runner_plist : "res/nana.plist",
-    restart_n_png : "res/gift1.png",
+    restart_n_png : "res/nana_enter.png",
     restart_s_png : "res/slider.png",
 	
 	background_ogg : "res/background.ogg",

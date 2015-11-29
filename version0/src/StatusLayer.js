@@ -26,11 +26,11 @@ var StatusLayer = cc.Layer.extend({
     },
 	
 	updateMeter:function (px) {
-    this.labelMeter.setString(parseInt(px / 10) + "M");
+        this.labelMeter.setString(parseInt(px / 10) + "M");
 	},
 	
 	addCoin:function (num) {
-    this.coins += num;
-    this.labelCoin.setString("Coins:" + this.coins);
+        this.coins += num;
+        this.labelCoin.setString("Coins:" + this.coins);
 	}
 });

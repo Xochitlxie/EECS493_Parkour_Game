@@ -46,7 +46,7 @@ var MenuLayer = cc.Layer.extend({
 
     demoPlay : function(){
         cc.log("enter demo page");
-        cc.director.runScene(new PlayScene());
+        cc.director.runScene(new demoScene());
     },
      
     onPlay : function(){

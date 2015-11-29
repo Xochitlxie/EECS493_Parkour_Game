@@ -2,6 +2,9 @@
 var g_groundHight = 57;
 var g_runnerStartX = 80;
 
+var animateStopForStar = 0;
+var starFinished = 0;
+
 if(typeof TagOfLayer == "undefined") {
 
     var TagOfLayer = {};

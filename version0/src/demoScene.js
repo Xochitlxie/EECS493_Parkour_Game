@@ -38,7 +38,7 @@ var demoScene = cc.Scene.extend({
     },
 
     collisionRockBegin:function (arbiter, space) {
-        cc.log("==game over");
+        cc.log("game over");
 
 		cc.audioEngine.stopMusic();
 
@@ -57,8 +57,8 @@ var demoScene = cc.Scene.extend({
 
 		this.gameLayer = cc.Layer.create();
 
-		this.gameLayer.addChild(new BackgroundLayer(this.space), 0, TagOfLayer.background);
-	    this.gameLayer.addChild(new AnimationLayer(this.space), 0, TagOfLayer.Animation);
+		this.gameLayer.addChild(new demoBackgroundLayer(this.space), 0, TagOfLayer.background);
+	    this.gameLayer.addChild(new demoAnimationLayer(this.space), 0, TagOfLayer.Animation);
 	    this.addChild(this.gameLayer);
 	    this.addChild(new StatusLayer(), 0, TagOfLayer.Status);
 

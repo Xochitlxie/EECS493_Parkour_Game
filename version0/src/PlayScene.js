@@ -91,6 +91,7 @@ var PlayScene = cc.Scene.extend({
 		animationLayer.update();
 	 
 	    this.gameLayer.setPosition(cc.p(-eyeX,0));
+
 	}
 
 })

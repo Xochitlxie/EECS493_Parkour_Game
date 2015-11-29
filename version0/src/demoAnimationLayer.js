@@ -7,10 +7,10 @@
     RunnerStat.running = 0;
     RunnerStat.jumpUp = 1;
     RunnerStat.jumpDown = 2;
-    //RunnerStat.stop = 3;
+    RunnerStat.stop = 3;
 	}
 	
-var AnimationLayer = cc.Layer.extend({
+var demoAnimationLayer = cc.Layer.extend({
 
     spriteSheet:null,
     runningAction:null,
@@ -40,7 +40,7 @@ var AnimationLayer = cc.Layer.extend({
 
     getCurrentPos:function(){
 
-        //if(animateStopForStar===1 && starFinished===0) return g_runnerStartX+250;
+        if(animateStopForStar===1 && starFinished===0) return g_runnerStartX+250;
 
         return this.sprite.getPositionX();
     },
@@ -54,11 +54,11 @@ var AnimationLayer = cc.Layer.extend({
 		var statusLayer = this.getParent().getParent().getChildByTag(TagOfLayer.Status);
 		statusLayer.updateMeter(this.getCurrentPos() - g_runnerStartX);
 		
-        // if(this.getCurrentPos()-g_runnerStartX >= 250 && animateStopForStar===0){
-        //     console.log("will stop soon");
-        //     this.stat = RunnerStat.stop;
-        //     animateStopForStar = 1;
-        // } 
+        if(this.getCurrentPos()-g_runnerStartX >= 250 && animateStopForStar===0){
+            console.log("will stop soon");
+            this.stat = RunnerStat.stop;
+            animateStopForStar = 1;
+        } 
 
 		//in the update method of AnimationLayer
 		// check and update runner stat
@@ -75,15 +75,14 @@ var AnimationLayer = cc.Layer.extend({
                 this.sprite.stopAllActions();
                 this.sprite.runAction(this.runningAction);
             }
+        } else if (this.stat == RunnerStat.stop){
+            this.sprite.stopAllActions();
+            console.log("haha");
+            this.sprite.setPosition(new cc.Point(this.getCurrentPos(), g_groundHight));
+            //this.sprite.pause();
+            //this.runAction
+            //this.runningAction.release();
         }
-        // } else if (this.stat == RunnerStat.stop){
-        //     this.sprite.stopAllActions();
-        //     console.log("haha");
-        //     this.sprite.setPosition(new cc.Point(this.getCurrentPos(), g_groundHight));
-        //     //this.sprite.pause();
-        //     //this.runAction
-        //     //this.runningAction.release();
-        // }
 	},
 	
 	jump:function () {
@@ -97,14 +96,14 @@ var AnimationLayer = cc.Layer.extend({
        }
 	},
 
-    // goOn:function(){
-    //     cc.log("will go on");
+    goOn:function(){
+        cc.log("will go on");
 
-    //     this.sprite.runAction(this.runningAction);
-    //     this.stat = RunnerStat.running;
+        this.sprite.runAction(this.runningAction);
+        this.stat = RunnerStat.running;
         
-    //     starFinished = 1;
-    // },
+        starFinished = 1;
+    },
 	
 	initAction: function() {
 		// init runningAction
@@ -161,7 +160,7 @@ var AnimationLayer = cc.Layer.extend({
 			onKeyPressed:  function(keycode, event){
     			cc.log("Key with keycode " + keycode + " pressed");  
     			if(keycode===32) event.getCurrentTarget().jump();
-                //else if (keycode===13) event.getCurrentTarget().goOn();
+                else if (keycode===13) event.getCurrentTarget().goOn();
 			},  
 			onKeyReleased: function(keycode, event){
 			    cc.log("Key with keycode " + keycode + " released"); 

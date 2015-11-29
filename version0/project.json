@@ -21,6 +21,8 @@
         "src/coin.js",
         "src/rock.js",
         "src/GameOverLayer.js",
-        "src/demoScene.js"
+        "src/demoScene.js",
+        "src/demoBackgroundLayer.js",
+        "src/demoAnimationLayer.js"
     ]
 }

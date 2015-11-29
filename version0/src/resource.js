@@ -16,9 +16,13 @@ var res = {
     map_png : "res/base.jpg",
     map00_tmx: "res/map00.tmx",
     map01_tmx: "res/map01.tmx",
+    map02_tmx: "res/map02.tmx",
+    map03_tmx: "res/map03.tmx",
 
     background_png :"res/background.png",
     background_plist : "res/background.plist"
+
+
 };
 
 // var g_resources = [];
@@ -37,6 +41,8 @@ var g_resources = [
     res.map_png,
     res.map00_tmx,
     res.map01_tmx,
+    res.map02_tmx,
+    res.map03_tmx,
     res.restart_n_png,
     res.restart_s_png,
     res.demo_png,

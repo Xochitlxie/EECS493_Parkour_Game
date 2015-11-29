@@ -39,10 +39,11 @@ var PlayScene = cc.Scene.extend({
 
     collisionRockBegin:function (arbiter, space) {
         cc.log("==game over");
-
+        var animate = this.gameLayer.getChildByTag(TagOfLayer.Animation);
+        animate.body.applyForce(cp.v(0, 1800), cp.v(0, 0));
 		cc.audioEngine.stopMusic();
 
-		cc.director.pause();
+		//cc.director.pause();
         this.addChild(new GameOverLayer());    
     },
 

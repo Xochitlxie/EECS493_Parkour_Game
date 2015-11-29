@@ -32,13 +32,13 @@ if (navigator.getUserMedia) {
 		recorder = context.createScriptProcessor(bufferSize, 1, 1);
 		
 		recorder.onaudioprocess = function(e) {
-			console.log('recording');
+			//console.log('recording');
 			var bufferLength = analyser.frequencyBinCount;
 			var dataArray = new Uint8Array(bufferLength);
 			analyser.getByteFrequencyData(dataArray);
 			
 			var average = getAverageVolume(dataArray);
-			console.log(average);
+			//console.log(average);
 
 			if (average > 100) {
 
@@ -111,7 +111,8 @@ var AnimationLayer = cc.Layer.extend({
     getEyeX:function () {
         return this.getCurrentPos() - g_runnerStartX;
     },
-
+	
+	
 	update: function() {
 		var statusLayer = this.getParent().getParent().getChildByTag(TagOfLayer.Status);
 		statusLayer.updateMeter(this.getCurrentPos() - g_runnerStartX);
@@ -148,7 +149,7 @@ var AnimationLayer = cc.Layer.extend({
         // }
 	},
 	
-	jump:function () {
+	jump: function () {
        cc.log("jump");
        if (this.stat == RunnerStat.running) {
            this.body.applyImpulse(cp.v(0, 250), cp.v(0, 0));
@@ -157,6 +158,11 @@ var AnimationLayer = cc.Layer.extend({
 		   this.sprite.runAction(this.jumpUpAction);
 		   //this.sprite.runAction(this.jumpDownAction);
        }
+	},
+	
+	accelerate: function() {
+		cc.log("accelerate");
+		this.body.applyImpulse(cp.v(10, 0), cp.v(0, 0));
 	},
 
     // goOn:function(){
@@ -238,7 +244,16 @@ var AnimationLayer = cc.Layer.extend({
             event.getCurrentTarget().jump();
         }
 	}), this);
-		//cc.eventManager.addListener(this._listener1, this);
+	
+		
+		cc.eventManager.addListener(cc.EventListener.create({
+        event: cc.EventListener.CUSTOM,
+        eventName: "accelerate",
+        callback: function(event){
+			cc.log('accelerate');
+            event.getCurrentTarget().accelerate();
+        }
+	}), this);
 		
     /*    // init runningAction
         var animFrames = [];

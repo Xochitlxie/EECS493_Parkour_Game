@@ -26,7 +26,14 @@ var StatusLayer = cc.Layer.extend({
     },
 	
 	updateMeter:function (px) {
-        this.labelMeter.setString(parseInt(px / 10) + "M");
+        this.labelMeter.setString( parseInt(px / 10) + "M");
+		var distance = parseInt(px / 10);
+		var olddis = 0;
+		if (distance - olddis > 100) {
+			olddis = distance;
+			var event = new cc.EventCustom("accelerate");
+			cc.eventManager.dispatchEvent(event);
+	}
 	},
 	
 	addCoin:function (num) {

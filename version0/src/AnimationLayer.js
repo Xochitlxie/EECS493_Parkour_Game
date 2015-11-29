@@ -29,7 +29,7 @@ if (navigator.getUserMedia) {
 		
 		var bufferSize = 2048;
 		
-		recorder = context.createJavaScriptNode(bufferSize, 1, 1);
+		recorder = context.createScriptProcessor(bufferSize, 1, 1);
 		
 		recorder.onaudioprocess = function(e) {
 			console.log('recording');

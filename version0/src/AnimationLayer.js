@@ -1,4 +1,66 @@
 
+if (!navigator.getUserMedia) {
+    navigator.getUserMedia = navigator.getUserMedia 
+                           || navigator.webkitGetUserMedia 
+                           || navigator.mozGetUserMedia 
+                           || navigator.msGetUserMedia;    
+}
+
+function getAverageVolume(array) {
+    var values = 0; 
+    // get all the frequency amplitudes
+    for (var i = 0; i < array.length; i++) {
+        values += array[i];
+    }
+    return values / (array.length);
+}
+
+if (navigator.getUserMedia) {
+    navigator.getUserMedia({audio: true}, function (stream) {
+        audioContext = window.AudioContext || webkitGetUserMedia;
+		context = new audioContext();
+		
+		audioInput = context.createMediaStreamSource(stream);
+		console.log('successful');
+		
+		var analyser = context.createAnalyser();
+		analyser.smoothingTimeConstant = 0.3;
+		analyser.fftSize = 2048;
+		
+		var bufferSize = 2048;
+		
+		recorder = context.createJavaScriptNode(bufferSize, 1, 1);
+		
+		recorder.onaudioprocess = function(e) {
+			console.log('recording');
+			var bufferLength = analyser.frequencyBinCount;
+			var dataArray = new Uint8Array(bufferLength);
+			analyser.getByteFrequencyData(dataArray);
+			
+			var average = getAverageVolume(dataArray);
+			console.log(average);
+
+			if (average > 100) {
+
+				var event = new cc.EventCustom("voice_jump");
+
+				cc.eventManager.dispatchEvent(event);
+			};
+
+		}
+		
+		analyser.connect(recorder);
+		audioInput.connect(analyser);
+		recorder.connect(context.destination);
+
+    }, function (e) {
+        console.log('Error capturing audio.');
+    });
+} else {
+    alert('getUserMedia not supported in this browser.');
+}
+
+
 	
 	// define enum for runner status
 
@@ -144,7 +206,7 @@ var AnimationLayer = cc.Layer.extend({
 		this.jumpDownAction = cc.RepeatForever.create(cc.Animate.create(animation));
 		this.jumpDownAction.retain();  
 	},
-	
+		
     init:function () {
 
         this._super();
@@ -166,7 +228,18 @@ var AnimationLayer = cc.Layer.extend({
 			onKeyReleased: function(keycode, event){
 			    cc.log("Key with keycode " + keycode + " released"); 
 			}
-        }, this);  
+        }, this);    
+		
+		cc.eventManager.addListener(cc.EventListener.create({
+        event: cc.EventListener.CUSTOM,
+        eventName: "voice_jump",
+        callback: function(event){
+			cc.log('voice jump');
+            event.getCurrentTarget().jump();
+        }
+	}), this);
+		//cc.eventManager.addListener(this._listener1, this);
+		
     /*    // init runningAction
         var animFrames = [];
         for (var i = 1; i < 3; i++) {

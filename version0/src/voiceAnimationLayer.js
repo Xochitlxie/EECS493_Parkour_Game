@@ -1,16 +1,78 @@
 
-    
-    // define enum for runner status
+if (!navigator.getUserMedia) {
+    navigator.getUserMedia = navigator.getUserMedia 
+                           || navigator.webkitGetUserMedia 
+                           || navigator.mozGetUserMedia 
+                           || navigator.msGetUserMedia;    
+}
 
-    if(typeof RunnerStat == "undefined") {
+function getAverageVolume(array) {
+    var values = 0; 
+    // get all the frequency amplitudes
+    for (var i = 0; i < array.length; i++) {
+        values += array[i];
+    }
+    return values / (array.length);
+}
+
+if (navigator.getUserMedia) {
+    navigator.getUserMedia({audio: true}, function (stream) {
+        audioContext = window.AudioContext || webkitGetUserMedia;
+		context = new audioContext();
+		
+		audioInput = context.createMediaStreamSource(stream);
+		console.log('successful');
+		
+		var analyser = context.createAnalyser();
+		analyser.smoothingTimeConstant = 0.3;
+		analyser.fftSize = 2048;
+		
+		var bufferSize = 2048;
+		
+		recorder = context.createScriptProcessor(bufferSize, 1, 1);
+		
+		recorder.onaudioprocess = function(e) {
+			//console.log('recording');
+			var bufferLength = analyser.frequencyBinCount;
+			var dataArray = new Uint8Array(bufferLength);
+			analyser.getByteFrequencyData(dataArray);
+			
+			var average = getAverageVolume(dataArray);
+			//console.log(average);
+
+			if (average > 100) {
+
+				var event = new cc.EventCustom("voice_jump");
+
+				cc.eventManager.dispatchEvent(event);
+			};
+
+		}
+		
+		analyser.connect(recorder);
+		audioInput.connect(analyser);
+		recorder.connect(context.destination);
+
+    }, function (e) {
+        console.log('Error capturing audio.');
+    });
+} else {
+    alert('getUserMedia not supported in this browser.');
+}
+
+
+	
+	// define enum for runner status
+
+	if(typeof RunnerStat == "undefined") {
     var RunnerStat = {};
     RunnerStat.running = 0;
     RunnerStat.jumpUp = 1;
     RunnerStat.jumpDown = 2;
     //RunnerStat.stop = 3;
-    }
-    
-var AnimationLayer = cc.Layer.extend({
+	}
+	
+var voiceAnimationLayer = cc.Layer.extend({
 
     spriteSheet:null,
     runningAction:null,
@@ -19,12 +81,12 @@ var AnimationLayer = cc.Layer.extend({
     shape:null,
 
     space:null,
-    
-    jumpUpAction:null,
-    jumpDownAction:null,
-    
-    stat: RunnerStat.running,// init with running status
-    
+	
+	jumpUpAction:null,
+	jumpDownAction:null,
+	
+	stat: RunnerStat.running,// init with running status
+	
     ctor:function (space) {
         this._super();
         this.space = space;
@@ -49,19 +111,20 @@ var AnimationLayer = cc.Layer.extend({
     getEyeX:function () {
         return this.getCurrentPos() - g_runnerStartX;
     },
-
-    update: function() {
-        var statusLayer = this.getParent().getParent().getChildByTag(TagOfLayer.Status);
-        statusLayer.updateMeter(this.getCurrentPos() - g_runnerStartX);
-        
+	
+	
+	update: function() {
+		var statusLayer = this.getParent().getParent().getChildByTag(TagOfLayer.Status);
+		statusLayer.updateMeter(this.getCurrentPos() - g_runnerStartX);
+		
         // if(this.getCurrentPos()-g_runnerStartX >= 250 && animateStopForStar===0){
         //     console.log("will stop soon");
         //     this.stat = RunnerStat.stop;
         //     animateStopForStar = 1;
         // } 
 
-        //in the update method of AnimationLayer
-        // check and update runner stat
+		//in the update method of AnimationLayer
+		// check and update runner stat
         var vel = this.body.getVel();
         if (this.stat == RunnerStat.jumpUp) {
             if (vel.y < 0.1) {
@@ -84,18 +147,23 @@ var AnimationLayer = cc.Layer.extend({
         //     //this.runAction
         //     //this.runningAction.release();
         // }
-    },
-    
-    jump:function () {
+	},
+	
+	jump: function () {
        cc.log("jump");
        if (this.stat == RunnerStat.running) {
            this.body.applyImpulse(cp.v(0, 250), cp.v(0, 0));
            this.stat = RunnerStat.jumpUp;
            this.sprite.stopAllActions();
-           this.sprite.runAction(this.jumpUpAction);
-           //this.sprite.runAction(this.jumpDownAction);
+		   this.sprite.runAction(this.jumpUpAction);
+		   //this.sprite.runAction(this.jumpDownAction);
        }
-    },
+	},
+	
+	accelerate: function() {
+		cc.log("accelerate");
+		this.body.applyImpulse(cp.v(10, 0), cp.v(0, 0));
+	},
 
     // goOn:function(){
     //     cc.log("will go on");
@@ -105,9 +173,9 @@ var AnimationLayer = cc.Layer.extend({
         
     //     starFinished = 1;
     // },
-    
-    initAction: function() {
-        // init runningAction
+	
+	initAction: function() {
+		// init runningAction
         var animFrames = [];
         for (var i = 1; i < 3; i++) {
             var str = "run_Nana_mini_" + i + ".png";
@@ -118,33 +186,33 @@ var AnimationLayer = cc.Layer.extend({
         var animation = cc.Animation.create(animFrames, 0.1);
         animation.setDelayPerUnit(1/14);
         this.runningAction = cc.RepeatForever.create(cc.Animate.create(animation));
-        this.runningAction.retain();
+		this.runningAction.retain();
  
-        // init jumpUpAction
-        animFrames = [];
-        for (var i = 1; i < 3; i++) {
-            var str = "run_Nana_mini" + i + ".png";
-            var frame = cc.spriteFrameCache.getSpriteFrame(str);
-            animFrames.push(frame);
-        }
+		// init jumpUpAction
+		animFrames = [];
+		for (var i = 1; i < 3; i++) {
+			var str = "run_Nana_mini" + i + ".png";
+			var frame = cc.spriteFrameCache.getSpriteFrame(str);
+			animFrames.push(frame);
+		}
  
-        animation = new cc.Animation.create(animFrames, 0.2);
-        this.jumpUpAction = cc.RepeatForever.create(cc.Animate.create(animation));
-        this.jumpUpAction.retain();
+		animation = new cc.Animation.create(animFrames, 0.2);
+		this.jumpUpAction = cc.RepeatForever.create(cc.Animate.create(animation));
+		this.jumpUpAction.retain();
  
-        // init jumpDownAction
-        animFrames = [];
-        for (var i = 1; i < 3; i++) {
-            var str = "run_Nana_mini" + i + ".png";
-            var frame = cc.spriteFrameCache.getSpriteFrame(str);
-            animFrames.push(frame);
-        }
+		// init jumpDownAction
+		animFrames = [];
+		for (var i = 1; i < 3; i++) {
+			var str = "run_Nana_mini" + i + ".png";
+			var frame = cc.spriteFrameCache.getSpriteFrame(str);
+			animFrames.push(frame);
+		}
  
-        animation = new cc.Animation.create(animFrames, 0.3);
-        this.jumpDownAction = cc.RepeatForever.create(cc.Animate.create(animation));
-        this.jumpDownAction.retain();  
-    },
-    
+		animation = new cc.Animation.create(animFrames, 0.3);
+		this.jumpDownAction = cc.RepeatForever.create(cc.Animate.create(animation));
+		this.jumpDownAction.retain();  
+	},
+		
     init:function () {
 
         this._super();
@@ -154,19 +222,39 @@ var AnimationLayer = cc.Layer.extend({
         this.spriteSheet = cc.SpriteBatchNode.create(res.runner_png);
         this.addChild(this.spriteSheet);
 
-        this.initAction();
-        
-        cc.eventManager.addListener({
-            event: cc.EventListener.KEYBOARD,
-            onKeyPressed:  function(keycode, event){
-                cc.log("Key with keycode " + keycode + " pressed");  
-                if(keycode===32) event.getCurrentTarget().jump();
+		this.initAction();
+		
+		cc.eventManager.addListener({
+			event: cc.EventListener.KEYBOARD,
+			onKeyPressed:  function(keycode, event){
+    			cc.log("Key with keycode " + keycode + " pressed");  
+    			if(keycode===32) event.getCurrentTarget().jump();
                 //else if (keycode===13) event.getCurrentTarget().goOn();
-            },  
-            onKeyReleased: function(keycode, event){
-                cc.log("Key with keycode " + keycode + " released"); 
-            }
-        }, this);  
+			},  
+			onKeyReleased: function(keycode, event){
+			    cc.log("Key with keycode " + keycode + " released"); 
+			}
+        }, this);    
+		
+		cc.eventManager.addListener(cc.EventListener.create({
+        event: cc.EventListener.CUSTOM,
+        eventName: "voice_jump",
+        callback: function(event){
+			cc.log('voice jump');
+            event.getCurrentTarget().jump();
+        }
+	}), this);
+	
+		
+		cc.eventManager.addListener(cc.EventListener.create({
+        event: cc.EventListener.CUSTOM,
+        eventName: "accelerate",
+        callback: function(event){
+			cc.log('accelerate');
+            event.getCurrentTarget().accelerate();
+        }
+	}), this);
+		
     /*    // init runningAction
         var animFrames = [];
         for (var i = 1; i < 3; i++) {
@@ -178,9 +266,9 @@ var AnimationLayer = cc.Layer.extend({
         var animation = cc.Animation.create(animFrames, 0.1);
         animation.setDelayPerUnit(1/14);
         this.runningAction = cc.RepeatForever.create(cc.Animate.create(animation));
-    */  
+	*/	
         this.sprite = cc.PhysicsSprite.create('#run_Nana_mini_1.png');
-        
+		
         var contentSize = this.sprite.getContentSize();
 
         this.body = new cp.Body(1, cp.momentForBox(1, contentSize.width, contentSize.height));
@@ -213,11 +301,11 @@ var AnimationLayer = cc.Layer.extend({
         // spriteRunner.runAction(cc.Sequence.create(actionTo));
         // this.addChild(spriteRunner);
     },
-    
-    onExit:function() {
+	
+	onExit:function() {
         this.runningAction.release();
         this.jumpUpAction.release();
         this.jumpDownAction.release();
         this._super();
-    }
+	}
 });

@@ -23,6 +23,9 @@
         "src/GameOverLayer.js",
         "src/demoScene.js",
         "src/demoBackgroundLayer.js",
-        "src/demoAnimationLayer.js"
+        "src/demoAnimationLayer.js",
+        "src/voiceScene.js",
+        "src/voiceAnimationLayer.js",
+        "src/voiceStatusLayer.js"
     ]
 }

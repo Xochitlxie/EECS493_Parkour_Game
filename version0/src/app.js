@@ -14,7 +14,8 @@ var MenuLayer = cc.Layer.extend({
      
         //3. calculate the center point
         var centerpos = cc.p(winsize.width / 2, winsize.height / 2);
-        var demoPos = cc.p(winsize.width/2, winsize.height/8);
+        var demoPos = cc.p(winsize.width/4, winsize.height/8);
+        var voicePos = cc.p(winsize.width*3/4, winsize.height/8);
      
         //4. create a background image and set it's position at the center of the screen
         var spritebg = cc.Sprite.create(res.helloBG_png);
@@ -41,6 +42,15 @@ var MenuLayer = cc.Layer.extend({
         var demoMenu = cc.Menu.create(demoPlay);
         demoMenu.setPosition(demoPos);
         this.addChild(demoMenu);
+
+        //8. create voice version button
+        var voicePlay = cc.MenuItemSprite.create(
+            cc.Sprite.create(res.voice_png),
+            cc.Sprite.create(res.voice_png),
+            this.voicePlay, this);
+        var voiceMenu = cc.Menu.create(voicePlay);
+        voiceMenu.setPosition(voicePos);
+        this.addChild(voiceMenu);
             
     },
 
@@ -52,6 +62,11 @@ var MenuLayer = cc.Layer.extend({
     onPlay : function(){
         cc.log("onplay clicked");
         cc.director.runScene(new PlayScene());
+    },
+
+    voicePlay : function(){
+        cc.log("enter voice play");
+        cc.director.runScene(new VoiceScene());
     }
 });
 

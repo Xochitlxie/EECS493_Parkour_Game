@@ -21,7 +21,9 @@ var res = {
     map03_tmx: "res/map03.tmx",
 
     background_png :"res/background.png",
-    background_plist : "res/background.plist"
+    background_plist : "res/background.plist",
+    
+    star_bubble:"res/collect-coin.png",
 
 
 };
@@ -54,6 +56,7 @@ var g_resources = [
 	 res.pickup_coin_wav,
 
     res.background_png,
-    res.background_plist
+    res.background_plist,
+    res.star_bubble
 ];
 

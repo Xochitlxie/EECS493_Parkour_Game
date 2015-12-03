@@ -22,6 +22,7 @@ var demoAnimationLayer = cc.Layer.extend({
 	
 	jumpUpAction:null,
 	jumpDownAction:null,
+    Coin:null,
 	
 	stat: RunnerStat.running,// init with running status
 	
@@ -34,7 +35,9 @@ var demoAnimationLayer = cc.Layer.extend({
         // Parallax ratio and offset
         this.addChild(this._debugNode, 10);
 
-        this._debugNode.setVisible(false);
+        //this._debugNode.setVisible(false);
+        
+
 
     },
 
@@ -77,6 +80,9 @@ var demoAnimationLayer = cc.Layer.extend({
             }
         } else if (this.stat == RunnerStat.stop){
             this.sprite.stopAllActions();
+            Coin = cc.Sprite.create("res/collect-coin.png");
+            Coin.attr({x: 800, y: 170});
+            this.addChild(Coin);
             console.log("haha");
             this.sprite.setPosition(new cc.Point(this.getCurrentPos(), g_groundHight));
             //this.sprite.pause();
@@ -98,7 +104,7 @@ var demoAnimationLayer = cc.Layer.extend({
 
     goOn:function(){
         cc.log("will go on");
-
+        this.Coin.removeFromParent();
         this.sprite.runAction(this.runningAction);
         this.stat = RunnerStat.running;
         
@@ -160,7 +166,10 @@ var demoAnimationLayer = cc.Layer.extend({
 			onKeyPressed:  function(keycode, event){
     			cc.log("Key with keycode " + keycode + " pressed");  
     			if(keycode===32) event.getCurrentTarget().jump();
-                else if (keycode===13) event.getCurrentTarget().goOn();
+                else if (keycode===13) {
+                    //Coin.removeFromParent();
+                    event.getCurrentTarget().goOn();
+                }
 			},  
 			onKeyReleased: function(keycode, event){
 			    cc.log("Key with keycode " + keycode + " released"); 

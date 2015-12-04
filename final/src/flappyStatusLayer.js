@@ -1,5 +1,5 @@
 
-var voiceStatusLayer = cc.Layer.extend({
+var flappyStatusLayer = cc.Layer.extend({
 
     labelCoin:null,
     labelMeter:null,
@@ -29,7 +29,7 @@ var voiceStatusLayer = cc.Layer.extend({
         this.labelMeter.setString( parseInt(px / 10) + "M");
 		var distance = parseInt(px / 10);
 		var olddis = 0;
-		if (distance - olddis > 100) {
+		if (distance - olddis > 500) {
 			olddis = distance;
 			var event = new cc.EventCustom("accelerate");
 			cc.eventManager.dispatchEvent(event);

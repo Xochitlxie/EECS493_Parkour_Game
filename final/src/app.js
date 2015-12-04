@@ -13,8 +13,9 @@ var MenuLayer = cc.Layer.extend({
      
         //3. calculate the center point
         var centerpos = cc.p(winsize.width / 2, winsize.height / 2);
-        var demoPos = cc.p(winsize.width/4, winsize.height/8);
-        var voicePos = cc.p(winsize.width*3/4, winsize.height/8);
+        var demoPos = cc.p(winsize.width/4, winsize.height*7/8);
+        var flappyPos = cc.p(winsize.width*3/4, winsize.height/8);
+        var voicePos = cc.p(winsize.width/4, winsize.height/8);
      
         //4. create a background image and set it's position at the center of the screen
         var spritebg = cc.Sprite.create(res.helloBG_png);
@@ -42,6 +43,15 @@ var MenuLayer = cc.Layer.extend({
         demoMenu.setPosition(demoPos);
         this.addChild(demoMenu);
 
+        //8. create flappy version button
+        var flappyPlay = cc.MenuItemSprite.create(
+            cc.Sprite.create(res.flappy_png),
+            cc.Sprite.create(res.flappy_png),
+            this.flappyPlay, this);
+        var flappyMenu = cc.Menu.create(flappyPlay);
+        flappyMenu.setPosition(flappyPos);
+        this.addChild(flappyMenu);
+
         //8. create voice version button
         var voicePlay = cc.MenuItemSprite.create(
             cc.Sprite.create(res.voice_png),
@@ -61,6 +71,11 @@ var MenuLayer = cc.Layer.extend({
     onPlay : function(){
         cc.log("onplay clicked");
         cc.director.runScene(new PlayScene());
+    },
+
+    flappyPlay : function(){
+        cc.log("enter flappy play");
+        cc.director.runScene(new flappyScene());
     },
 
     voicePlay : function(){

@@ -72,7 +72,7 @@ if (navigator.getUserMedia) {
     //RunnerStat.stop = 3;
 	}
 	
-var voiceAnimationLayer = cc.Layer.extend({
+var flappyAnimationLayer = cc.Layer.extend({
 
     spriteSheet:null,
     runningAction:null,
@@ -127,7 +127,7 @@ var voiceAnimationLayer = cc.Layer.extend({
 		// check and update runner stat
         var vel = this.body.getVel();
         if (this.stat == RunnerStat.jumpUp) {
-            if (vel.y < 0.1) {
+            if (vel.y < 250) {
                 this.stat = RunnerStat.jumpDown;
                 this.sprite.stopAllActions();
                 this.sprite.runAction(this.jumpDownAction);
@@ -151,7 +151,7 @@ var voiceAnimationLayer = cc.Layer.extend({
 	
 	jump: function () {
        cc.log("jump");
-       if (this.stat == RunnerStat.running) {
+       if (this.stat == RunnerStat.running || this.stat == RunnerStat.jumpDown) {
            this.body.applyImpulse(cp.v(0, 250), cp.v(0, 0));
            this.stat = RunnerStat.jumpUp;
            this.sprite.stopAllActions();
@@ -162,7 +162,8 @@ var voiceAnimationLayer = cc.Layer.extend({
 	
 	accelerate: function() {
 		cc.log("accelerate");
-		this.body.applyImpulse(cp.v(10, 0), cp.v(0, 0));
+		this.body.applyImpulse(cp.v(1, 0), cp.v(0, 0));
+ 
 	},
 
     // goOn:function(){

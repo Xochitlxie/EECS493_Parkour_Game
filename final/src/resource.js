@@ -9,6 +9,7 @@ var res = {
     restart_s_png : "res/slider.png",
     demo_png : "res/gift3.png",
     voice_png : "res/ice_block.png",
+    flappy_png : "res/space_rock.png",
 	
 	background_ogg : "res/background.ogg",
 	//jump_mp3 : "res/jump.mp3",
@@ -24,7 +25,7 @@ var res = {
     background_png :"res/background.png",
     background_plist : "res/background.plist",
     
-    star_bubble:"res/collect-coin.png",
+    //star_bubble:"res/collect-coin.png",
 
 
 };
@@ -52,6 +53,7 @@ var g_resources = [
     res.restart_s_png,
     res.demo_png,
     res.voice_png,
+    res.flappy_png,
 	
 	res.background_ogg,
 	//res.jump_mp3,
@@ -59,6 +61,6 @@ var g_resources = [
 
     res.background_png,
     res.background_plist,
-    res.star_bubble
+    //res.star_bubble
 ];
 

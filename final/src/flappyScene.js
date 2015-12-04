@@ -1,5 +1,5 @@
 
-var VoiceScene = cc.Scene.extend({
+var flappyScene = cc.Scene.extend({
 
 	space:null,
 	shapeToRemove : [],
@@ -13,11 +13,20 @@ var VoiceScene = cc.Scene.extend({
 	    this.space.gravity = cp.v(0, -350);
 	 
 	    // 3. set up Walls
+		var g_ceilHight = cc.director.getWinSize()-30;
 	    var wallBottom = new cp.SegmentShape(this.space.staticBody,
 	        cp.v(0, g_groundHight),// start point
 	        cp.v(4294967295, g_groundHight),// MAX INT:4294967295
 	        1);// thickness of wall
 	    this.space.addStaticShape(wallBottom);
+		
+	    var winsize = cc.director.getWinSize();
+	    
+	    var wallUpper = new cp.SegmentShape(this.space.staticBody,
+	    	cp.v(0, winsize.height-60),
+	    	cp.v(4294967295, winsize.height-60),
+	    	1);
+	    this.space.addStaticShape(wallUpper);
 
 	    // collision Handler
 	    this.space.addCollisionHandler(SpriteTag.runner, SpriteTag.coin,
@@ -59,9 +68,9 @@ var VoiceScene = cc.Scene.extend({
 		this.gameLayer = cc.Layer.create();
 
 		this.gameLayer.addChild(new BackgroundLayer(this.space), 0, TagOfLayer.background);
-	    this.gameLayer.addChild(new voiceAnimationLayer(this.space), 0, TagOfLayer.Animation);
+	    this.gameLayer.addChild(new flappyAnimationLayer(this.space), 0, TagOfLayer.Animation);
 	    this.addChild(this.gameLayer);
-	    this.addChild(new voiceStatusLayer(), 0, TagOfLayer.Status);
+	    this.addChild(new flappyStatusLayer(), 0, TagOfLayer.Status);
 
 		
 		// this.addChild(new BackgroundLayer());

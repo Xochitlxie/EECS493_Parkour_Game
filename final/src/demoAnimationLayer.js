@@ -2,13 +2,13 @@
 	
 	// define enum for runner status
 
-	if(typeof RunnerStat == "undefined") {
+if(typeof RunnerStat == "undefined") {
     var RunnerStat = {};
     RunnerStat.running = 0;
     RunnerStat.jumpUp = 1;
     RunnerStat.jumpDown = 2;
     RunnerStat.stop = 3;
-	}
+}
 	
 var demoAnimationLayer = cc.Layer.extend({
 
@@ -22,7 +22,7 @@ var demoAnimationLayer = cc.Layer.extend({
 	
 	jumpUpAction:null,
 	jumpDownAction:null,
-    Coin:null,
+    coinTag:null,
 	
 	stat: RunnerStat.running,// init with running status
 	
@@ -31,9 +31,9 @@ var demoAnimationLayer = cc.Layer.extend({
         this.space = space;
         this.init();
 
-        this._debugNode = cc.PhysicsDebugNode.create(this.space);
+        //this._debugNode = cc.PhysicsDebugNode.create(this.space);
         // Parallax ratio and offset
-        this.addChild(this._debugNode, 10);
+        //this.addChild(this._debugNode, 10);
 
         //this._debugNode.setVisible(false);
         
@@ -49,7 +49,7 @@ var demoAnimationLayer = cc.Layer.extend({
     },
 
     // avoid runner running out of screen
-    getEyeX:function () {
+    getEyeX:function() {
         return this.getCurrentPos() - g_runnerStartX;
     },
 
@@ -80,11 +80,11 @@ var demoAnimationLayer = cc.Layer.extend({
             }
         } else if (this.stat == RunnerStat.stop){
             this.sprite.stopAllActions();
-            Coin = cc.Sprite.create("res/collect-coin.png");
-            Coin.attr({x: 800, y: 170});
-            this.addChild(Coin);
+            coinTag = cc.Sprite.create("res/collect-coin.png");
+            coinTag.attr({x: 800, y: 170});
+            this.addChild(coinTag);
             console.log("haha");
-            this.sprite.setPosition(new cc.Point(this.getCurrentPos(), g_groundHight));
+            this.sprite.setPosition(new cc.Point(this.getCurrentPos(), g_groundHight+22));
             //this.sprite.pause();
             //this.runAction
             //this.runningAction.release();
@@ -190,16 +190,21 @@ var demoAnimationLayer = cc.Layer.extend({
         this.sprite = cc.PhysicsSprite.create('#run_Nana_mini_1.png');
 		
         var contentSize = this.sprite.getContentSize();
-
+        //2. init the runner physic body
         this.body = new cp.Body(1, cp.momentForBox(1, contentSize.width, contentSize.height));
         //3. set the position of the runner
-        this.body.p = cc.p(g_runnerStartX, g_groundHight + contentSize.height / 2);
+        console.log(contentSize.height);
+        console.log(g_groundHight);
+        var h = 0;
+        this.body.p = new cc.Point(g_runnerStartX, 100);
+        console.log(this.body.p);
         //4. apply impulse to the body
-        this.body.applyImpulse(cp.v(150, 0), cp.v(0, 0));//run speed
+        this.body.applyImpulse(cp.v(200, 0), cp.v(100, 0));//run speed
         //5. add the created body to space
         this.space.addBody(this.body);
         //6. create the shape for the body
-        this.shape = new cp.BoxShape(this.body, contentSize.width - 14, contentSize.height);
+        this.shape = new cp.BoxShape(this.body, contentSize.width - 14, contentSize.height-50);
+        //this.shape = new cp.BoxShape(this.body, contentSize.width - 14, contentSize.height+500);
         //7. add shape to space
         this.space.addShape(this.shape);
         //8. set body to the physic sprite
@@ -223,6 +228,9 @@ var demoAnimationLayer = cc.Layer.extend({
     },
 	
 	onExit:function() {
+        animateStopForStar = 0;
+        starFinished = 0;
+
         this.runningAction.release();
         this.jumpUpAction.release();
         this.jumpDownAction.release();

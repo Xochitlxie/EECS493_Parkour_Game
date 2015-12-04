@@ -19,6 +19,7 @@ var res = {
     map01_tmx: "res/map01.tmx",
     map02_tmx: "res/map02.tmx",
     map03_tmx: "res/map03.tmx",
+    map04_tmx: "res/map04.tmx",
 
     background_png :"res/background.png",
     background_plist : "res/background.plist",
@@ -46,6 +47,7 @@ var g_resources = [
     res.map01_tmx,
     res.map02_tmx,
     res.map03_tmx,
+    res.map04_tmx,
     res.restart_n_png,
     res.restart_s_png,
     res.demo_png,

@@ -19,6 +19,14 @@ var demoScene = cc.Scene.extend({
 	        1);// thickness of wall
 	    this.space.addStaticShape(wallBottom);
 
+	    var winsize = cc.director.getWinSize();
+	    
+	    var wallUpper = new cp.SegmentShape(this.space.staticBody,
+	    	cp.v(0, winsize.height-60),
+	    	cp.v(4294967295, winsize.height-60),
+	    	1);
+	    this.space.addStaticShape(wallUpper);
+
 	    // collision Handler
 	    this.space.addCollisionHandler(SpriteTag.runner, SpriteTag.coin,
         	this.collisionCoinBegin.bind(this), null, null, null);

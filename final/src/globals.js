@@ -1,5 +1,5 @@
 
-var g_groundHight = 57;
+var g_groundHight = 70;
 var g_runnerStartX = 80;
 
 var animateStopForStar = 0;

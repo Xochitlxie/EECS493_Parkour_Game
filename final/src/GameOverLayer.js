@@ -19,6 +19,7 @@ var GameOverLayer = cc.LayerColor.extend({
         this.addChild(menu);
     },
     onRestart:function (sender) {
+
         cc.director.resume();
         cc.director.runScene(new MenuScene());
     }

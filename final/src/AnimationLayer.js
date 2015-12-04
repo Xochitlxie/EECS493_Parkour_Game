@@ -191,7 +191,7 @@ var AnimationLayer = cc.Layer.extend({
         //5. add the created body to space
         this.space.addBody(this.body);
         //6. create the shape for the body
-        this.shape = new cp.BoxShape(this.body, contentSize.width - 14, contentSize.height);
+        this.shape = new cp.BoxShape(this.body, contentSize.width - 14, contentSize.height-50);
         //7. add shape to space
         this.space.addShape(this.shape);
         //8. set body to the physic sprite

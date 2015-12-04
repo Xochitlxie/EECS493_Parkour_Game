@@ -33,12 +33,17 @@ var demoBackgroundLayer = cc.Layer.extend({
         this.map01.setPosition(cc.p(this.mapWidth, 0));
         this.addChild(this.map01);
 
+        this.map02 = cc.TMXTiledMap.create(res.map04_tmx);
+        this.map02.setPosition(cc.p(this.mapWidth, 0));
+        this.addChild(this.map02);
+
         cc.spriteFrameCache.addSpriteFrames(res.background_plist);
         this.spriteSheet = cc.SpriteBatchNode.create(res.background_png);
         this.addChild(this.spriteSheet);
 
         this.loadObjects(this.map00, 0);
         this.loadObjects(this.map01, 1);
+        this.loadObjects(this.map02, 2);
 
         this.scheduleUpdate();
 
@@ -104,15 +109,21 @@ var demoBackgroundLayer = cc.Layer.extend({
         if (this.mapIndex == newMapIndex) {
             return false;
         }
-        if (0 == newMapIndex % 2) {
+        if (0 == newMapIndex % 3) {
             // change mapSecond
-            this.map01.setPositionX(this.mapWidth * (newMapIndex + 1));
-            this.loadObjects(this.map01, newMapIndex + 1); // add objects
-        } else {
-            // change mapFirst
             this.map00.setPositionX(this.mapWidth * (newMapIndex + 1));
-            this.loadObjects(this.map00, newMapIndex + 1);
+            this.loadObjects(this.map00, newMapIndex + 1); // add objects
+        } else if (newMapIndex%3 == 1){
+            // change mapFirst
+            this.map01.setPositionX(this.mapWidth * (newMapIndex + 1));
+            this.loadObjects(this.map01, newMapIndex + 1);
+        } else if( newMapIndex%3 == 2){
+
+            // change mapthird
+            this.map02.setPositionX(this.mapWidth * (newMapIndex + 1));
+            this.loadObjects(this.map02, newMapIndex + 1);
         }
+
         this.removeObjects(newMapIndex - 1); // remove objects in older map
         this.mapIndex = newMapIndex;
         return true;

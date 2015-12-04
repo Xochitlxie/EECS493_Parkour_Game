@@ -80,7 +80,7 @@ var demoAnimationLayer = cc.Layer.extend({
             }
         } else if (this.stat == RunnerStat.stop){
             this.sprite.stopAllActions();
-            coinTag = cc.Sprite.create("res/collect-coin.png");
+            coinTag = cc.Sprite.create("res/Collect_stars.png");
             coinTag.attr({x: 800, y: 170});
             this.addChild(coinTag);
             console.log("haha");

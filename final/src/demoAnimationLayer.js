@@ -104,7 +104,7 @@ var demoAnimationLayer = cc.Layer.extend({
 
     goOn:function(){
         cc.log("will go on");
-        this.Coin.removeFromParent();
+        //this.Coin.removeFromParent();
         this.sprite.runAction(this.runningAction);
         this.stat = RunnerStat.running;
         

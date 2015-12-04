@@ -13,11 +13,20 @@ var VoiceScene = cc.Scene.extend({
 	    this.space.gravity = cp.v(0, -350);
 	 
 	    // 3. set up Walls
+		var g_ceilHight = cc.director.getWinSize()-30;
 	    var wallBottom = new cp.SegmentShape(this.space.staticBody,
 	        cp.v(0, g_groundHight),// start point
 	        cp.v(4294967295, g_groundHight),// MAX INT:4294967295
 	        1);// thickness of wall
 	    this.space.addStaticShape(wallBottom);
+		
+	    var winsize = cc.director.getWinSize();
+	    
+	    var wallUpper = new cp.SegmentShape(this.space.staticBody,
+	    	cp.v(0, winsize.height-60),
+	    	cp.v(4294967295, winsize.height-60),
+	    	1);
+	    this.space.addStaticShape(wallUpper);
 
 	    // collision Handler
 	    this.space.addCollisionHandler(SpriteTag.runner, SpriteTag.coin,

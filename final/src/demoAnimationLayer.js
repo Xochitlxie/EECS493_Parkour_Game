@@ -17,8 +17,7 @@ var demoAnimationLayer = cc.Layer.extend({
     shape:null,
 
     space:null,
-    step:0,
-	
+    step:null,
 	jumpUpAction:null,
 	jumpDownAction:null,
     coinTag:null,
@@ -29,6 +28,7 @@ var demoAnimationLayer = cc.Layer.extend({
         this._super();
         this.space = space;
         this.init();
+        this.step = 0;
 
         //this._debugNode = cc.PhysicsDebugNode.create(this.space);
         // Parallax ratio and offset
@@ -43,7 +43,7 @@ var demoAnimationLayer = cc.Layer.extend({
     getCurrentPos:function(){
 
         if(animateStopForStar===1 && starFinished===0) return g_runnerStartX+250;
-        if(animateStopForSky===1 && skyFinished===0) return g_runnerStartX+1200;
+        if(animateStopForSky===1 && skyFinished===0) return g_runnerStartX+1400;
         if(animateStopForBlock===1 && blockFinished===0) return g_runnerStartX+2000;
         if(animateStopForStatus===1 && statusFinished===0) return g_runnerStartX+2700;
 
@@ -64,13 +64,15 @@ var demoAnimationLayer = cc.Layer.extend({
             this.stat = RunnerStat.stop;
             animateStopForStar = 1;
             this.step++;
+            console.log(this.step);
         } 
 
-        if(this.getCurrentPos()-g_runnerStartX >= 1200 && animateStopForSky===0){
+        if(this.getCurrentPos()-g_runnerStartX >= 1400 && animateStopForSky===0){
             console.log("will stop soon on sky");
             this.stat = RunnerStat.stop;
             animateStopForSky = 1;
             this.step++;
+            console.log(this.step);
         }
 
         if(this.getCurrentPos()-g_runnerStartX >= 2000 && animateStopForBlock===0){
@@ -78,6 +80,7 @@ var demoAnimationLayer = cc.Layer.extend({
             this.stat = RunnerStat.stop;
             animateStopForBlock = 1;
             this.step++;
+            console.log(this.step);
         }
 
         if(this.getCurrentPos()-g_runnerStartX >=2700 && animateStopForStatus===0){
@@ -85,6 +88,7 @@ var demoAnimationLayer = cc.Layer.extend({
             this.stat = RunnerStat.stop;
             animateStopForStatus = 1;
             this.step++;
+            console.log(this.step);
         }
 
 
@@ -105,15 +109,36 @@ var demoAnimationLayer = cc.Layer.extend({
             }
         } else if (this.stat == RunnerStat.stop){
             this.sprite.stopAllActions();
-            coinTag = cc.Sprite.create("res/Collect_stars.png");
-            if(this.step===1) coinTag.attr({x: 800, y: 170});
+            
+            if (this.step == 1){
+            var coinTag = cc.Sprite.create("res/Collect_stars.png");
+            coinTag.attr({x: 700, y: 200});
             this.addChild(coinTag);
+            }
+            else if (this.step == 2){
+            var jumpTag = cc.Sprite.create("res/jump.png");
+            jumpTag.attr({x: 2100, y: 350});
+            this.addChild(jumpTag);   
+            }
+            else if (this.step == 3){
+            var blockTag = cc.Sprite.create("res/block.png");
+            blockTag.attr({x: 2600, y: 210});
+            this.addChild(blockTag);   
+            }
+            else if (this.step == 4){
+            var distanceTag = cc.Sprite.create("res/distance.png");
+            distanceTag.attr({x: 3430, y: 530});
+            var starsTag = cc.Sprite.create("res/stars.png");
+            starsTag.attr({x: 2800, y: 470});
+            this.addChild(distanceTag);       
+            this.addChild(starsTag);   
+            }
             console.log("haha");
             this.sprite.setPosition(new cc.Point(this.getCurrentPos(), g_groundHight+24));
             //this.sprite.pause();
             //this.runAction
             //this.runningAction.release();
-        }
+    }
 	},
 	
 	jump:function () {

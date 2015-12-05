@@ -5,6 +5,16 @@ var g_runnerStartX = 80;
 var animateStopForStar = 0;
 var starFinished = 0;
 
+var animateStopForSky = 0;
+var skyFinished = 0;
+
+var animateStopForBlock = 0;
+var blockFinished = 0;
+
+var animateStopForStatus = 0;
+var statusFinished = 0;
+
+
 if(typeof TagOfLayer == "undefined") {
 
     var TagOfLayer = {};

@@ -1,7 +1,5 @@
 
-	
-	// define enum for runner status
-
+// define enum for runner status
 if(typeof RunnerStat == "undefined") {
     var RunnerStat = {};
     RunnerStat.running = 0;
@@ -19,6 +17,7 @@ var demoAnimationLayer = cc.Layer.extend({
     shape:null,
 
     space:null,
+    step:0,
 	
 	jumpUpAction:null,
 	jumpDownAction:null,
@@ -44,6 +43,9 @@ var demoAnimationLayer = cc.Layer.extend({
     getCurrentPos:function(){
 
         if(animateStopForStar===1 && starFinished===0) return g_runnerStartX+250;
+        if(animateStopForSky===1 && skyFinished===0) return g_runnerStartX+1200;
+        if(animateStopForBlock===1 && blockFinished===0) return g_runnerStartX+2000;
+        if(animateStopForStatus===1 && statusFinished===0) return g_runnerStartX+2700;
 
         return this.sprite.getPositionX();
     },
@@ -58,10 +60,33 @@ var demoAnimationLayer = cc.Layer.extend({
 		statusLayer.updateMeter(this.getCurrentPos() - g_runnerStartX);
 		
         if(this.getCurrentPos()-g_runnerStartX >= 250 && animateStopForStar===0){
-            console.log("will stop soon");
+            console.log("will stop soon on star");
             this.stat = RunnerStat.stop;
             animateStopForStar = 1;
+            this.step++;
         } 
+
+        if(this.getCurrentPos()-g_runnerStartX >= 1200 && animateStopForSky===0){
+            console.log("will stop soon on sky");
+            this.stat = RunnerStat.stop;
+            animateStopForSky = 1;
+            this.step++;
+        }
+
+        if(this.getCurrentPos()-g_runnerStartX >= 2000 && animateStopForBlock===0){
+            console.log("will stop soon on block");
+            this.stat = RunnerStat.stop;
+            animateStopForBlock = 1;
+            this.step++;
+        }
+
+        if(this.getCurrentPos()-g_runnerStartX >=2700 && animateStopForStatus===0){
+            console.log("will stop soon on status");
+            this.stat = RunnerStat.stop;
+            animateStopForStatus = 1;
+            this.step++;
+        }
+
 
 		//in the update method of AnimationLayer
 		// check and update runner stat
@@ -81,10 +106,10 @@ var demoAnimationLayer = cc.Layer.extend({
         } else if (this.stat == RunnerStat.stop){
             this.sprite.stopAllActions();
             coinTag = cc.Sprite.create("res/Collect_stars.png");
-            coinTag.attr({x: 800, y: 170});
+            if(this.step===1) coinTag.attr({x: 800, y: 170});
             this.addChild(coinTag);
             console.log("haha");
-            this.sprite.setPosition(new cc.Point(this.getCurrentPos(), g_groundHight+22));
+            this.sprite.setPosition(new cc.Point(this.getCurrentPos(), g_groundHight+24));
             //this.sprite.pause();
             //this.runAction
             //this.runningAction.release();
@@ -108,7 +133,10 @@ var demoAnimationLayer = cc.Layer.extend({
         this.sprite.runAction(this.runningAction);
         this.stat = RunnerStat.running;
         
-        starFinished = 1;
+        if(!starFinished) starFinished = 1;
+        else if(starFinished && !skyFinished) skyFinished = 1;
+        else if(starFinished && skyFinished && !blockFinished) blockFinished = 1;
+        else if(starFinished && skyFinished && blockFinished && !statusFinished) statusFinished = 1;
     },
 	
 	initAction: function() {
@@ -230,6 +258,12 @@ var demoAnimationLayer = cc.Layer.extend({
 	onExit:function() {
         animateStopForStar = 0;
         starFinished = 0;
+        animateStopForSky = 0;
+        skyFinished = 0;
+        animateStopForBlock = 0;
+        blockFinished = 0;
+        animateStopForStatus = 0;
+        statusFinished = 0;
 
         this.runningAction.release();
         this.jumpUpAction.release();

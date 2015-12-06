@@ -45,7 +45,7 @@ var demoAnimationLayer = cc.Layer.extend({
         if(animateStopForStar===1 && starFinished===0) return g_runnerStartX+250;
         if(animateStopForSky===1 && skyFinished===0) return g_runnerStartX+1400;
         if(animateStopForBlock===1 && blockFinished===0) return g_runnerStartX+2000;
-        if(animateStopForStatus===1 && statusFinished===0) return g_runnerStartX+2700;
+        if(animateStopForStatus===1 && statusFinished===0) return g_runnerStartX+3300;
 
         return this.sprite.getPositionX();
     },
@@ -63,32 +63,24 @@ var demoAnimationLayer = cc.Layer.extend({
             console.log("will stop soon on star");
             this.stat = RunnerStat.stop;
             animateStopForStar = 1;
-            this.step++;
-            console.log(this.step);
         } 
 
         if(this.getCurrentPos()-g_runnerStartX >= 1400 && animateStopForSky===0){
             console.log("will stop soon on sky");
             this.stat = RunnerStat.stop;
             animateStopForSky = 1;
-            this.step++;
-            console.log(this.step);
         }
 
         if(this.getCurrentPos()-g_runnerStartX >= 2000 && animateStopForBlock===0){
             console.log("will stop soon on block");
             this.stat = RunnerStat.stop;
             animateStopForBlock = 1;
-            this.step++;
-            console.log(this.step);
         }
 
-        if(this.getCurrentPos()-g_runnerStartX >=2700 && animateStopForStatus===0){
+        if(this.getCurrentPos()-g_runnerStartX >=3300 && animateStopForStatus===0){
             console.log("will stop soon on status");
             this.stat = RunnerStat.stop;
             animateStopForStatus = 1;
-            this.step++;
-            console.log(this.step);
         }
 
 
@@ -110,35 +102,39 @@ var demoAnimationLayer = cc.Layer.extend({
         } else if (this.stat == RunnerStat.stop){
             this.sprite.stopAllActions();
             
-            if (this.step == 1){
-            var coinTag = cc.Sprite.create("res/Collect_stars.png");
-            coinTag.attr({x: 700, y: 200});
-            this.addChild(coinTag);
+            if (!starTagAdded){
+                var starTutorial = cc.Sprite.create("res/Collect_stars.png");
+                starTutorial.attr({x: 700, y: 200});
+                this.addChild(starTutorial, 0, tutorialTag.star);
+                starTagAdded = 1;
             }
-            else if (this.step == 2){
-            var jumpTag = cc.Sprite.create("res/jump.png");
-            jumpTag.attr({x: 2100, y: 350});
-            this.addChild(jumpTag);   
+            else if (!skyTagAdded){
+                var jumpTag = cc.Sprite.create("res/jump.png");
+                jumpTag.attr({x: 2100, y: 350});
+                this.addChild(jumpTag, 0, tutorialTag.sky);   
+                skyTagAdded = 1;
             }
-            else if (this.step == 3){
-            var blockTag = cc.Sprite.create("res/block.png");
-            blockTag.attr({x: 2600, y: 210});
-            this.addChild(blockTag);   
+            else if (!blockTagAdded){
+                var blockTag = cc.Sprite.create("res/block.png");
+                blockTag.attr({x: 2600, y: 210});
+                this.addChild(blockTag, 0, tutorialTag.block); 
+                blockTagAdded = 1;  
             }
-            else if (this.step == 4){
-            var distanceTag = cc.Sprite.create("res/distance.png");
-            distanceTag.attr({x: 3430, y: 530});
-            var starsTag = cc.Sprite.create("res/stars.png");
-            starsTag.attr({x: 2800, y: 470});
-            this.addChild(distanceTag);       
-            this.addChild(starsTag);   
+            else if (!statusTagAdded){
+                var distanceTag = cc.Sprite.create("res/distance.png");
+                distanceTag.attr({x: 4030, y: 530});
+                var starsTag = cc.Sprite.create("res/stars.png");
+                starsTag.attr({x: 3400, y: 470});
+                this.addChild(distanceTag, 0, tutorialTag.status1);       
+                this.addChild(starsTag, 0, tutorialTag.status2); 
+                statusTagAdded = 1;  
             }
             console.log("haha");
             this.sprite.setPosition(new cc.Point(this.getCurrentPos(), g_groundHight+24));
             //this.sprite.pause();
             //this.runAction
             //this.runningAction.release();
-    }
+        }
 	},
 	
 	jump:function () {
@@ -158,10 +154,23 @@ var demoAnimationLayer = cc.Layer.extend({
         this.sprite.runAction(this.runningAction);
         this.stat = RunnerStat.running;
         
-        if(!starFinished) starFinished = 1;
-        else if(starFinished && !skyFinished) skyFinished = 1;
-        else if(starFinished && skyFinished && !blockFinished) blockFinished = 1;
-        else if(starFinished && skyFinished && blockFinished && !statusFinished) statusFinished = 1;
+        if(!starFinished){
+            starFinished = 1;
+            this.removeChildByTag(tutorialTag.star, true);
+        } 
+        else if(starFinished && !skyFinished){
+            skyFinished = 1;
+            this.removeChildByTag(tutorialTag.sky, true);
+        } 
+        else if(starFinished && skyFinished && !blockFinished){
+            blockFinished = 1;
+            this.removeChildByTag(tutorialTag.block, true);
+        } 
+        else if(starFinished && skyFinished && blockFinished && !statusFinished){
+            statusFinished = 1;
+            this.removeChildByTag(tutorialTag.status1, true);
+            this.removeChildByTag(tutorialTag.status2, true);
+        } 
     },
 	
 	initAction: function() {
@@ -283,12 +292,16 @@ var demoAnimationLayer = cc.Layer.extend({
 	onExit:function() {
         animateStopForStar = 0;
         starFinished = 0;
+        starTagAdded = 0;
         animateStopForSky = 0;
         skyFinished = 0;
+        skyTagAdded = 0;
         animateStopForBlock = 0;
         blockFinished = 0;
+        blockTagAdded = 0;
         animateStopForStatus = 0;
         statusFinished = 0;
+        statusTagAdded = 0;
 
         this.runningAction.release();
         this.jumpUpAction.release();

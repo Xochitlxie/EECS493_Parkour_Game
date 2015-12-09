@@ -5,8 +5,8 @@ var res = {
     PlayBG_png  : "res/playBG.png",
     runner_png  : "res/nana.png",
     runner_plist : "res/nana.plist",
-    restart_n_png : "res/nana_enter.png",
-    restart_s_png : "res/slider.png",
+    restart_n_png : "res/restart0.png",
+    restart_s_png : "res/restart1.png",
     demo_png : "res/gift3.png",
     voice_png : "res/ice_block.png",
     flappy_png : "res/space_rock.png",
@@ -26,6 +26,9 @@ var res = {
 
     background_png :"res/background.png",
     background_plist : "res/background.plist",
+    
+    backToMenu_n_png : "res/backToHome0.png",
+    backToMenu_s_png : "res/backToHome0.png",
 
     f_map00_tmx: "res/f_map00.tmx",
     f_background_png: "res/f_background.png",
@@ -67,6 +70,9 @@ var g_resources = [
     res.background_png,
     res.background_plist,
     //res.star_bubble
+    
+    res.backToMenu_n_png,
+    res.backToMenu_s_png,
 
     res.f_map00_tmx,
     res.f_background_png,

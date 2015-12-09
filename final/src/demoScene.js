@@ -51,7 +51,7 @@ var demoScene = cc.Scene.extend({
 		cc.audioEngine.stopMusic();
 
 		cc.director.pause();
-        this.addChild(new GameOverLayer());    
+        this.addChild(new GameOverLayerDemo());    
     },
 
 

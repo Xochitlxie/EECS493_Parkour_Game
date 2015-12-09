@@ -30,9 +30,12 @@
         "src/flappyScene.js",
         "src/flappyAnimationLayer.js",
         "src/flappyStatusLayer.js",
+        "src/flappyBgrLayer.js",
+        "src/f_coin.js",
+        "src/f_rock.js",
         "src/voiceScene.js",
         "src/voiceAnimationLayer.js",
         "src/voiceStatusLayer.js"
-        
+
     ]
 }

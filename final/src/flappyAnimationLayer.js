@@ -1,5 +1,5 @@
 	// define enum for runner status
-
+var context = null;
 	if(typeof RunnerStat == "undefined") {
     var RunnerStat = {};
     RunnerStat.running = 0;
@@ -45,7 +45,7 @@ var flappyAnimationLayer = cc.Layer.extend({
 				if (navigator.getUserMedia) {
 						navigator.getUserMedia({audio: true}, function (stream) {
 								audioContext = window.AudioContext || webkitGetUserMedia;
-						context = new audioContext();
+						if(context == null) context = new audioContext();
 
 						audioInput = context.createMediaStreamSource(stream);
 						console.log('successful');

@@ -10,11 +10,12 @@ var res = {
     demo_png : "res/gift3.png",
     voice_png : "res/ice_block.png",
     flappy_png : "res/space_rock.png",
-	
+
 	background_ogg : "res/background.ogg",
+
 	//jump_mp3 : "res/jump.mp3",
 	pickup_coin_wav : "res/pickup_coin.wav",
-	
+
     map_png : "res/base.jpg",
     map00_tmx: "res/map00.tmx",
     map01_tmx: "res/map01.tmx",
@@ -22,9 +23,13 @@ var res = {
     map03_tmx: "res/map03.tmx",
     map04_tmx: "res/map04.tmx",
 
+
     background_png :"res/background.png",
     background_plist : "res/background.plist",
-    
+
+    f_map00_tmx: "res/f_map00.tmx",
+    f_background_png: "res/f_background.png",
+    f_background_plist : "res/f_background.plist",
     //star_bubble:"res/collect-coin.png",
 
 
@@ -54,13 +59,16 @@ var g_resources = [
     res.demo_png,
     res.voice_png,
     res.flappy_png,
-	
-	res.background_ogg,
+
+	 res.background_ogg,
 	//res.jump_mp3,
 	 res.pickup_coin_wav,
 
     res.background_png,
     res.background_plist,
     //res.star_bubble
-];
 
+    res.f_map00_tmx,
+    res.f_background_png,
+    res.f_background_plist,
+];

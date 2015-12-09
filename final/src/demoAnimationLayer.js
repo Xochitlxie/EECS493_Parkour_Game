@@ -7,7 +7,7 @@ if(typeof RunnerStat == "undefined") {
     RunnerStat.jumpDown = 2;
     RunnerStat.stop = 3;
 }
-	
+    
 var demoAnimationLayer = cc.Layer.extend({
 
     spriteSheet:null,
@@ -18,12 +18,12 @@ var demoAnimationLayer = cc.Layer.extend({
 
     space:null,
     step:null,
-	jumpUpAction:null,
-	jumpDownAction:null,
+    jumpUpAction:null,
+    jumpDownAction:null,
     coinTag:null,
-	
-	stat: RunnerStat.running,// init with running status
-	
+    
+    stat: RunnerStat.running,// init with running status
+    
     ctor:function (space) {
         this._super();
         this.space = space;
@@ -55,10 +55,10 @@ var demoAnimationLayer = cc.Layer.extend({
         return this.getCurrentPos() - g_runnerStartX;
     },
 
-	update: function() {
-		var statusLayer = this.getParent().getParent().getChildByTag(TagOfLayer.Status);
-		statusLayer.updateMeter(this.getCurrentPos() - g_runnerStartX);
-		
+    update: function() {
+        var statusLayer = this.getParent().getParent().getChildByTag(TagOfLayer.Status);
+        statusLayer.updateMeter(this.getCurrentPos() - g_runnerStartX);
+        
         if(this.getCurrentPos()-g_runnerStartX >= 250 && animateStopForStar===0){
             console.log("will stop soon on star");
             this.stat = RunnerStat.stop;
@@ -83,9 +83,21 @@ var demoAnimationLayer = cc.Layer.extend({
             animateStopForStatus = 1;
         }
 
+        if(this.getCurrentPos()-g_runnerStartX >= 4500 ){
 
-		//in the update method of AnimationLayer
-		// check and update runner stat
+            cc.audioEngine.stopMusic();
+            cc.director.pause();
+            this.stat = RunnerStat.stop;
+
+            this.getParent().getParent().addChild(new GameOverLayerDemo()); 
+
+            this.onExit();
+
+        }
+
+
+        //in the update method of AnimationLayer
+        // check and update runner stat
         var vel = this.body.getVel();
         if (this.stat == RunnerStat.jumpUp) {
             if (vel.y < 0.1) {
@@ -102,25 +114,25 @@ var demoAnimationLayer = cc.Layer.extend({
         } else if (this.stat == RunnerStat.stop){
             this.sprite.stopAllActions();
             
-            if (!starTagAdded){
+            if (!starTagAdded && this.getCurrentPos()-g_runnerStartX > 249){
                 var starTutorial = cc.Sprite.create("res/Collect_stars.png");
                 starTutorial.attr({x: 700, y: 200});
                 this.addChild(starTutorial, 0, tutorialTag.star);
                 starTagAdded = 1;
             }
-            else if (!skyTagAdded){
+            else if (!skyTagAdded && this.getCurrentPos()-g_runnerStartX > 1399){
                 var jumpTag = cc.Sprite.create("res/jump.png");
                 jumpTag.attr({x: 2100, y: 350});
                 this.addChild(jumpTag, 0, tutorialTag.sky);   
                 skyTagAdded = 1;
             }
-            else if (!blockTagAdded){
+            else if (!blockTagAdded && this.getCurrentPos()-g_runnerStartX > 1999){
                 var blockTag = cc.Sprite.create("res/block.png");
                 blockTag.attr({x: 2600, y: 210});
                 this.addChild(blockTag, 0, tutorialTag.block); 
                 blockTagAdded = 1;  
             }
-            else if (!statusTagAdded){
+            else if (!statusTagAdded && this.getCurrentPos()-g_runnerStartX > 3299){
                 var distanceTag = cc.Sprite.create("res/distance.png");
                 distanceTag.attr({x: 4030, y: 530});
                 var starsTag = cc.Sprite.create("res/stars.png");
@@ -134,19 +146,20 @@ var demoAnimationLayer = cc.Layer.extend({
             //this.sprite.pause();
             //this.runAction
             //this.runningAction.release();
+
         }
-	},
-	
-	jump:function () {
+    },
+    
+    jump:function () {
        cc.log("jump");
        if (this.stat == RunnerStat.running) {
            this.body.applyImpulse(cp.v(0, 250), cp.v(0, 0));
            this.stat = RunnerStat.jumpUp;
            this.sprite.stopAllActions();
-		   this.sprite.runAction(this.jumpUpAction);
-		   //this.sprite.runAction(this.jumpDownAction);
+           this.sprite.runAction(this.jumpUpAction);
+           //this.sprite.runAction(this.jumpDownAction);
        }
-	},
+    },
 
     goOn:function(){
         cc.log("will go on");
@@ -172,9 +185,9 @@ var demoAnimationLayer = cc.Layer.extend({
             this.removeChildByTag(tutorialTag.status2, true);
         } 
     },
-	
-	initAction: function() {
-		// init runningAction
+    
+    initAction: function() {
+        // init runningAction
         var animFrames = [];
         for (var i = 1; i < 3; i++) {
             var str = "run_Nana_mini_" + i + ".png";
@@ -185,33 +198,33 @@ var demoAnimationLayer = cc.Layer.extend({
         var animation = cc.Animation.create(animFrames, 0.1);
         animation.setDelayPerUnit(1/14);
         this.runningAction = cc.RepeatForever.create(cc.Animate.create(animation));
-		this.runningAction.retain();
+        this.runningAction.retain();
  
-		// init jumpUpAction
-		animFrames = [];
-		for (var i = 1; i < 3; i++) {
-			var str = "run_Nana_mini" + i + ".png";
-			var frame = cc.spriteFrameCache.getSpriteFrame(str);
-			animFrames.push(frame);
-		}
+        // init jumpUpAction
+        animFrames = [];
+        for (var i = 1; i < 3; i++) {
+            var str = "run_Nana_mini" + i + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            animFrames.push(frame);
+        }
  
-		animation = new cc.Animation.create(animFrames, 0.2);
-		this.jumpUpAction = cc.RepeatForever.create(cc.Animate.create(animation));
-		this.jumpUpAction.retain();
+        animation = new cc.Animation.create(animFrames, 0.2);
+        this.jumpUpAction = cc.RepeatForever.create(cc.Animate.create(animation));
+        this.jumpUpAction.retain();
  
-		// init jumpDownAction
-		animFrames = [];
-		for (var i = 1; i < 3; i++) {
-			var str = "run_Nana_mini" + i + ".png";
-			var frame = cc.spriteFrameCache.getSpriteFrame(str);
-			animFrames.push(frame);
-		}
+        // init jumpDownAction
+        animFrames = [];
+        for (var i = 1; i < 3; i++) {
+            var str = "run_Nana_mini" + i + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            animFrames.push(frame);
+        }
  
-		animation = new cc.Animation.create(animFrames, 0.3);
-		this.jumpDownAction = cc.RepeatForever.create(cc.Animate.create(animation));
-		this.jumpDownAction.retain();  
-	},
-	
+        animation = new cc.Animation.create(animFrames, 0.3);
+        this.jumpDownAction = cc.RepeatForever.create(cc.Animate.create(animation));
+        this.jumpDownAction.retain();  
+    },
+    
     init:function () {
 
         this._super();
@@ -221,21 +234,21 @@ var demoAnimationLayer = cc.Layer.extend({
         this.spriteSheet = cc.SpriteBatchNode.create(res.runner_png);
         this.addChild(this.spriteSheet);
 
-		this.initAction();
-		
-		cc.eventManager.addListener({
-			event: cc.EventListener.KEYBOARD,
-			onKeyPressed:  function(keycode, event){
-    			cc.log("Key with keycode " + keycode + " pressed");  
-    			if(keycode===32) event.getCurrentTarget().jump();
+        this.initAction();
+        
+        cc.eventManager.addListener({
+            event: cc.EventListener.KEYBOARD,
+            onKeyPressed:  function(keycode, event){
+                cc.log("Key with keycode " + keycode + " pressed");  
+                if(keycode===32) event.getCurrentTarget().jump();
                 else if (keycode===13) {
                     //Coin.removeFromParent();
                     event.getCurrentTarget().goOn();
                 }
-			},  
-			onKeyReleased: function(keycode, event){
-			    cc.log("Key with keycode " + keycode + " released"); 
-			}
+            },  
+            onKeyReleased: function(keycode, event){
+                cc.log("Key with keycode " + keycode + " released"); 
+            }
         }, this);  
     /*    // init runningAction
         var animFrames = [];
@@ -248,9 +261,9 @@ var demoAnimationLayer = cc.Layer.extend({
         var animation = cc.Animation.create(animFrames, 0.1);
         animation.setDelayPerUnit(1/14);
         this.runningAction = cc.RepeatForever.create(cc.Animate.create(animation));
-	*/	
+    */  
         this.sprite = cc.PhysicsSprite.create('#run_Nana_mini_1.png');
-		
+        
         var contentSize = this.sprite.getContentSize();
         //2. init the runner physic body
         this.body = new cp.Body(1, cp.momentForBox(1, contentSize.width, contentSize.height));
@@ -288,8 +301,8 @@ var demoAnimationLayer = cc.Layer.extend({
         // spriteRunner.runAction(cc.Sequence.create(actionTo));
         // this.addChild(spriteRunner);
     },
-	
-	onExit:function() {
+    
+    onExit:function() {
         animateStopForStar = 0;
         starFinished = 0;
         starTagAdded = 0;
@@ -303,9 +316,10 @@ var demoAnimationLayer = cc.Layer.extend({
         statusFinished = 0;
         statusTagAdded = 0;
 
+        this.stat = RunnerStat.running;
         this.runningAction.release();
         this.jumpUpAction.release();
         this.jumpDownAction.release();
         this._super();
-	}
+    }
 });

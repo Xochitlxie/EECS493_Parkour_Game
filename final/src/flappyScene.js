@@ -10,7 +10,7 @@ var flappyScene = cc.Scene.extend({
 	    //1. new space object
 	    this.space = new cp.Space();
 	    //2. setup the  Gravity
-	    this.space.gravity = cp.v(0, -350);
+	    this.space.gravity = cp.v(0, -1200);
 
 	    // 3. set up Walls
 		var g_ceilHight = cc.director.getWinSize()-30;

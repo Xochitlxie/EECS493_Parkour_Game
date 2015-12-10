@@ -25,15 +25,15 @@ var demoBackgroundLayer = cc.Layer.extend({
         console.log("in demo background layer");
         this._super();
 
-        this.map00 = cc.TMXTiledMap.create(res.map02_tmx);
+        this.map00 = cc.TMXTiledMap.create(res.demo_map00_tmx);
         this.addChild(this.map00);
         this.mapWidth = this.map00.getContentSize().width;
 
-        this.map01 = cc.TMXTiledMap.create(res.map03_tmx);
+        this.map01 = cc.TMXTiledMap.create(res.demo_map01_tmx);
         this.map01.setPosition(cc.p(this.mapWidth, 0));
         this.addChild(this.map01);
 
-        this.map02 = cc.TMXTiledMap.create(res.map04_tmx);
+        this.map02 = cc.TMXTiledMap.create(res.demo_map02_tmx);
         this.map02.setPosition(cc.p(this.mapWidth, 0));
         this.addChild(this.map02);
 

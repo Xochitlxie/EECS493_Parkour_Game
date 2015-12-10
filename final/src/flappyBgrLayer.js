@@ -28,9 +28,18 @@ var flappyBgrLayer = cc.Layer.extend({
         this.addChild(this.map00);
         this.mapWidth = this.map00.getContentSize().width;
 
-        this.map01 = cc.TMXTiledMap.create(res.f_map00_tmx);
+        this.map01 = cc.TMXTiledMap.create(res.f_map01_tmx);
         this.map01.setPosition(cc.p(this.mapWidth, 0));
         this.addChild(this.map01);
+
+        this.map02 = cc.TMXTiledMap.create(res.f_map02_tmx);
+        this.map02.setPosition(cc.p(this.mapWidth, 0));
+        this.addChild(this.map02);
+
+        this.map03 = cc.TMXTiledMap.create(res.f_map03_tmx);
+        this.map03.setPosition(cc.p(this.mapWidth, 0));
+        this.addChild(this.map03);
+
 
         cc.spriteFrameCache.addSpriteFrames(res.f_background_plist);
         this.spriteSheet = cc.SpriteBatchNode.create(res.f_background_png);
@@ -38,6 +47,8 @@ var flappyBgrLayer = cc.Layer.extend({
 
         this.loadObjects(this.map00, 0);
         this.loadObjects(this.map01, 1);
+        this.loadObjects(this.map02, 2);
+        this.loadObjects(this.map03, 3);
 
         this.scheduleUpdate();
 
@@ -103,15 +114,24 @@ var flappyBgrLayer = cc.Layer.extend({
         if (this.mapIndex == newMapIndex) {
             return false;
         }
-        if (0 == newMapIndex % 2) {
+        if (0 == newMapIndex % 4) {
             // change mapSecond
-            this.map01.setPositionX(this.mapWidth * (newMapIndex + 1));
-            this.loadObjects(this.map01, newMapIndex + 1); // add objects
-        } else {
-            // change mapFirst
             this.map00.setPositionX(this.mapWidth * (newMapIndex + 1));
-            this.loadObjects(this.map00, newMapIndex + 1);
+            this.loadObjects(this.map00, newMapIndex + 1); // add objects
+        } else if(1 == newMapIndex % 4){
+            // change mapFirst
+            this.map01.setPositionX(this.mapWidth * (newMapIndex + 1));
+            this.loadObjects(this.map01, newMapIndex + 1);
+        } else if(2 == newMapIndex % 4){
+            // change mapFirst
+            this.map02.setPositionX(this.mapWidth * (newMapIndex + 1));
+            this.loadObjects(this.map02, newMapIndex + 1);
+        } else if(3 == newMapIndex % 4){
+             // change mapFirst
+            this.map03.setPositionX(this.mapWidth * (newMapIndex + 1));
+            this.loadObjects(this.map03, newMapIndex + 1);           
         }
+
         this.removeObjects(newMapIndex - 1); // remove objects in older map
         this.mapIndex = newMapIndex;
         return true;

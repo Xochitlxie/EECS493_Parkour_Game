@@ -89,7 +89,7 @@ var AnimationLayer = cc.Layer.extend({
     jump:function () {
        cc.log("jump");
        if (this.stat == RunnerStat.running) {
-           this.body.applyImpulse(cp.v(0, 250), cp.v(0, 0));
+           this.body.applyImpulse(cp.v(0, 300), cp.v(0, 0));
            this.stat = RunnerStat.jumpUp;
            this.sprite.stopAllActions();
            this.sprite.runAction(this.jumpUpAction);

@@ -22,6 +22,15 @@ var res = {
     map02_tmx: "res/map02.tmx",
     map03_tmx: "res/map03.tmx",
     map04_tmx: "res/map04.tmx",
+    map05_tmx: "res/map05.tmx",
+    map06_tmx: "res/map06.tmx",
+    map07_tmx: "res/map07.tmx",
+    map08_tmx: "res/map08.tmx",
+    map09_tmx: "res/map09.tmx",
+    
+    demo_map00_tmx: "res/demo_map00.tmx",
+    demo_map01_tmx: "res/demo_map01.tmx",
+    demo_map02_tmx: "res/demo_map02.tmx",
 
 
     background_png :"res/background.png",
@@ -31,6 +40,9 @@ var res = {
     backToMenu_s_png : "res/backToHome0.png",
 
     f_map00_tmx: "res/f_map00.tmx",
+    f_map01_tmx: "res/f_map01.tmx",
+    f_map02_tmx: "res/f_map02.tmx",
+    f_map03_tmx: "res/f_map03.tmx",
     f_background_png: "res/f_background.png",
     f_background_plist : "res/f_background.plist",
     //star_bubble:"res/collect-coin.png",
@@ -58,6 +70,15 @@ var g_resources = [
     res.map02_tmx,
     res.map03_tmx,
     res.map04_tmx,
+    res.map05_tmx,
+    res.map06_tmx,
+    res.map07_tmx,
+    res.map08_tmx,
+    res.map09_tmx,
+
+    res.demo_map00_tmx,
+    res.demo_map01_tmx,
+    res.demo_map02_tmx,
     res.restart_n_png,
     res.restart_s_png,
     res.demo_png,
@@ -76,6 +97,9 @@ var g_resources = [
     res.backToMenu_s_png,
 
     res.f_map00_tmx,
+    res.f_map01_tmx,
+    res.f_map02_tmx,
+    res.f_map03_tmx,
     res.f_background_png,
     res.f_background_plist,
     res.title_png,

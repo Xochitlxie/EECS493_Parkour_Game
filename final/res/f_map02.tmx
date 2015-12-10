@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="77" height="19" tilewidth="20" tileheight="32" nextobjectid="98">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="77" height="19" tilewidth="20" tileheight="32" nextobjectid="100">
  <tileset firstgid="1" name="base" tilewidth="20" tileheight="32" tilecount="2185">
   <image source="base.jpg" width="2313" height="630"/>
  </tileset>
@@ -14,46 +14,39 @@
   <object id="94" x="1101.84" y="313.506"/>
  </objectgroup>
  <objectgroup name="f_rock">
-  <object id="24" x="617.78" y="550.027"/>
-  <object id="25" x="617.622" y="528.357"/>
-  <object id="27" x="618" y="507"/>
-  <object id="34" x="618" y="507"/>
-  <object id="39" x="680" y="10"/>
-  <object id="41" x="729" y="143"/>
-  <object id="42" x="730" y="553"/>
-  <object id="43" x="730" y="532"/>
-  <object id="44" x="730" y="511"/>
-  <object id="45" x="730" y="490"/>
-  <object id="46" x="730" y="469"/>
-  <object id="47" x="824" y="551"/>
-  <object id="48" x="824" y="531"/>
-  <object id="49" x="824" y="512"/>
-  <object id="50" x="824" y="491"/>
-  <object id="51" x="1071" y="555"/>
-  <object id="52" x="1071" y="534"/>
-  <object id="53" x="1071" y="513"/>
-  <object id="54" x="1071" y="492"/>
-  <object id="55" x="1069" y="82"/>
-  <object id="56" x="1069" y="102"/>
-  <object id="57" x="1069" y="123"/>
-  <object id="58" x="1207" y="552"/>
-  <object id="59" x="1207" y="533"/>
-  <object id="60" x="1207" y="513"/>
-  <object id="61" x="1201" y="144"/>
-  <object id="62" x="1201" y="125"/>
-  <object id="63" x="1201" y="105"/>
-  <object id="64" x="1348" y="555"/>
-  <object id="65" x="1348" y="534"/>
-  <object id="66" x="1348" y="513"/>
-  <object id="67" x="1348" y="492"/>
-  <object id="68" x="1350" y="103"/>
-  <object id="69" x="1350" y="83"/>
-  <object id="70" x="1441" y="553"/>
-  <object id="71" x="1444" y="172"/>
-  <object id="72" x="1444" y="151"/>
-  <object id="73" x="1444" y="130"/>
-  <object id="85" x="894.903" y="33.9565"/>
-  <object id="96" x="1061" y="9.75029"/>
-  <object id="97" x="1396.05" y="9.45475"/>
+  <object id="24" x="99.78" y="551.027"/>
+  <object id="25" x="99.622" y="529.357"/>
+  <object id="27" x="100" y="508"/>
+  <object id="34" x="100" y="508"/>
+  <object id="39" x="321" y="10"/>
+  <object id="41" x="370" y="143"/>
+  <object id="42" x="346" y="552"/>
+  <object id="43" x="346" y="531"/>
+  <object id="44" x="346" y="510"/>
+  <object id="45" x="346" y="489"/>
+  <object id="46" x="346" y="468"/>
+  <object id="47" x="683" y="551"/>
+  <object id="48" x="683" y="531"/>
+  <object id="51" x="930" y="555"/>
+  <object id="52" x="930" y="534"/>
+  <object id="53" x="930" y="513"/>
+  <object id="55" x="624" y="51"/>
+  <object id="56" x="624" y="71"/>
+  <object id="57" x="624" y="92"/>
+  <object id="58" x="1196" y="552"/>
+  <object id="59" x="1196" y="533"/>
+  <object id="60" x="1196" y="513"/>
+  <object id="61" x="756" y="113"/>
+  <object id="62" x="756" y="94"/>
+  <object id="63" x="756" y="74"/>
+  <object id="68" x="888" y="31"/>
+  <object id="69" x="888" y="11"/>
+  <object id="70" x="1521" y="550"/>
+  <object id="71" x="1369" y="52"/>
+  <object id="72" x="1369" y="31"/>
+  <object id="73" x="1369" y="10"/>
+  <object id="85" x="535.903" y="33.9565"/>
+  <object id="96" x="1090" y="116.75"/>
+  <object id="97" x="1511.05" y="9.45475"/>
  </objectgroup>
 </map>

@@ -1,15 +1,15 @@
 var res = {
     helloBG_png : "res/Login.jpg",
-    start_n_png : "res/nana_enter.png",
-    start_s_png : "res/slider.png",
+    start_n_png : "res/button1.png",
+    start_s_png : "res/button1.png",
     PlayBG_png  : "res/playBG.png",
     runner_png  : "res/nana.png",
     runner_plist : "res/nana.plist",
     restart_n_png : "res/restart0.png",
     restart_s_png : "res/restart1.png",
-    demo_png : "res/gift3.png",
-    voice_png : "res/ice_block.png",
-    flappy_png : "res/space_rock.png",
+    demo_png : "res/button2.png",
+    voice_png : "res/button3.png",
+    flappy_png : "res/button4.png",
 
 	background_ogg : "res/background.ogg",
 
@@ -34,6 +34,7 @@ var res = {
     f_background_png: "res/f_background.png",
     f_background_plist : "res/f_background.plist",
     //star_bubble:"res/collect-coin.png",
+    title_png : "res/title.png",
 
 
 };
@@ -77,4 +78,5 @@ var g_resources = [
     res.f_map00_tmx,
     res.f_background_png,
     res.f_background_plist,
+    res.title_png,
 ];

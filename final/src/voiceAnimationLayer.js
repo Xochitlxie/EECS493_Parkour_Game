@@ -224,6 +224,8 @@ var voiceAnimationLayer = cc.Layer.extend({
 
 		this.initAction();
 
+		// disable voice control
+		/*
 		cc.eventManager.addListener({
 			event: cc.EventListener.KEYBOARD,
 			onKeyPressed:  function(keycode, event){
@@ -235,6 +237,8 @@ var voiceAnimationLayer = cc.Layer.extend({
 			    cc.log("Key with keycode " + keycode + " released");
 			}
         }, this);
+
+		*/
 
 		cc.eventManager.addListener(cc.EventListener.create({
         event: cc.EventListener.CUSTOM,

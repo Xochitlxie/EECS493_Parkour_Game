@@ -1,5 +1,5 @@
 
-    
+
     // define enum for runner status
 
     if(typeof RunnerStat == "undefined") {
@@ -9,7 +9,7 @@
     RunnerStat.jumpDown = 2;
     //RunnerStat.stop = 3;
     }
-    
+
 var AnimationLayer = cc.Layer.extend({
 
     spriteSheet:null,
@@ -19,12 +19,12 @@ var AnimationLayer = cc.Layer.extend({
     shape:null,
 
     space:null,
-    
+
     jumpUpAction:null,
     jumpDownAction:null,
-    
+
     stat: RunnerStat.running,// init with running status
-    
+
     ctor:function (space) {
         this._super();
         this.space = space;
@@ -53,12 +53,12 @@ var AnimationLayer = cc.Layer.extend({
     update: function() {
         var statusLayer = this.getParent().getParent().getChildByTag(TagOfLayer.Status);
         statusLayer.updateMeter(this.getCurrentPos() - g_runnerStartX);
-        
+
         // if(this.getCurrentPos()-g_runnerStartX >= 250 && animateStopForStar===0){
         //     console.log("will stop soon");
         //     this.stat = RunnerStat.stop;
         //     animateStopForStar = 1;
-        // } 
+        // }
 
         //in the update method of AnimationLayer
         // check and update runner stat
@@ -85,7 +85,7 @@ var AnimationLayer = cc.Layer.extend({
         //     //this.runningAction.release();
         // }
     },
-    
+
     jump:function () {
        cc.log("jump");
        if (this.stat == RunnerStat.running) {
@@ -97,15 +97,21 @@ var AnimationLayer = cc.Layer.extend({
        }
     },
 
+    accelerate: function() {
+      cc.log("accelerate");
+      this.body.applyImpulse(cp.v(2, 0), cp.v(0, 0));
+
+    },
+
     // goOn:function(){
     //     cc.log("will go on");
 
     //     this.sprite.runAction(this.runningAction);
     //     this.stat = RunnerStat.running;
-        
+
     //     starFinished = 1;
     // },
-    
+
     initAction: function() {
         // init runningAction
         var animFrames = [];
@@ -119,7 +125,7 @@ var AnimationLayer = cc.Layer.extend({
         animation.setDelayPerUnit(1/14);
         this.runningAction = cc.RepeatForever.create(cc.Animate.create(animation));
         this.runningAction.retain();
- 
+
         // init jumpUpAction
         animFrames = [];
         for (var i = 1; i < 3; i++) {
@@ -127,11 +133,11 @@ var AnimationLayer = cc.Layer.extend({
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
             animFrames.push(frame);
         }
- 
+
         animation = new cc.Animation.create(animFrames, 0.2);
         this.jumpUpAction = cc.RepeatForever.create(cc.Animate.create(animation));
         this.jumpUpAction.retain();
- 
+
         // init jumpDownAction
         animFrames = [];
         for (var i = 1; i < 3; i++) {
@@ -139,34 +145,43 @@ var AnimationLayer = cc.Layer.extend({
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
             animFrames.push(frame);
         }
- 
+
         animation = new cc.Animation.create(animFrames, 0.3);
         this.jumpDownAction = cc.RepeatForever.create(cc.Animate.create(animation));
-        this.jumpDownAction.retain();  
+        this.jumpDownAction.retain();
     },
-    
+
     init:function () {
 
         this._super();
-        
+
         // create sprite sheet
         cc.spriteFrameCache.addSpriteFrames(res.runner_plist);
         this.spriteSheet = cc.SpriteBatchNode.create(res.runner_png);
         this.addChild(this.spriteSheet);
 
         this.initAction();
-        
+
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
             onKeyPressed:  function(keycode, event){
-                cc.log("Key with keycode " + keycode + " pressed");  
+                cc.log("Key with keycode " + keycode + " pressed");
                 if(keycode===32) event.getCurrentTarget().jump();
                 //else if (keycode===13) event.getCurrentTarget().goOn();
-            },  
+            },
             onKeyReleased: function(keycode, event){
-                cc.log("Key with keycode " + keycode + " released"); 
+                cc.log("Key with keycode " + keycode + " released");
             }
-        }, this);  
+        }, this);
+
+        cc.eventManager.addListener(cc.EventListener.create({
+            event: cc.EventListener.CUSTOM,
+            eventName: "accelerate",
+            callback: function(event){
+          cc.log('accelerate');
+                event.getCurrentTarget().accelerate();
+            }
+      }), this);
     /*    // init runningAction
         var animFrames = [];
         for (var i = 1; i < 3; i++) {
@@ -178,9 +193,9 @@ var AnimationLayer = cc.Layer.extend({
         var animation = cc.Animation.create(animFrames, 0.1);
         animation.setDelayPerUnit(1/14);
         this.runningAction = cc.RepeatForever.create(cc.Animate.create(animation));
-    */  
+    */
         this.sprite = cc.PhysicsSprite.create('#run_Nana_mini_1.png');
-        
+
         var contentSize = this.sprite.getContentSize();
 
         this.body = new cp.Body(1, cp.momentForBox(1, contentSize.width, contentSize.height));
@@ -207,13 +222,13 @@ var AnimationLayer = cc.Layer.extend({
         // //create the hero sprite
         // var spriteRunner = cc.Sprite.create(res.runner_png);
         // spriteRunner.attr({x: 80, y: 85});
- 
+
         // //create the move action
         // var actionTo = cc.MoveTo.create(2, cc.p(300, 85));
         // spriteRunner.runAction(cc.Sequence.create(actionTo));
         // this.addChild(spriteRunner);
     },
-    
+
     onExit:function() {
         this.runningAction.release();
         this.jumpUpAction.release();

@@ -225,8 +225,8 @@ var flappyAnimationLayer = cc.Layer.extend({
 
 		this.initAction();
 
-		//disable the normal jump
-		/*
+		//disable the normal jump or not
+
 		cc.eventManager.addListener({
 			event: cc.EventListener.KEYBOARD,
 			onKeyPressed:  function(keycode, event){
@@ -239,7 +239,6 @@ var flappyAnimationLayer = cc.Layer.extend({
 			}
         }, this);
 
-		*/
 
 		cc.eventManager.addListener(cc.EventListener.create({
         event: cc.EventListener.CUSTOM,

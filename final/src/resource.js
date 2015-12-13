@@ -17,11 +17,12 @@ var res = {
 	pickup_coin_wav : "res/pickup_coin.wav",
 
     map_png : "res/base.jpg",
+    map_png2: "res/background2.png",
     map00_tmx: "res/map00.tmx",
     map01_tmx: "res/map01.tmx",
     map02_tmx: "res/map02.tmx",
     map03_tmx: "res/map03.tmx",
-    map04_tmx: "res/map04.tmx",
+   map04_tmx: "res/map04.tmx",
     map05_tmx: "res/map05.tmx",
     map06_tmx: "res/map06.tmx",
     map07_tmx: "res/map07.tmx",
@@ -46,7 +47,7 @@ var res = {
     f_background_png: "res/f_background.png",
     f_background_plist : "res/f_background.plist",
     //star_bubble:"res/collect-coin.png",
-    title_png : "res/title.png",
+    title_png : "res/title.gif",
 
 
 };
@@ -65,16 +66,18 @@ var g_resources = [
     res.runner_png,
     res.runner_plist,
     res.map_png,
+    res.map_png2,
     res.map00_tmx,
     res.map01_tmx,
     res.map02_tmx,
     res.map03_tmx,
-    res.map04_tmx,
+        res.map04_tmx,
     res.map05_tmx,
     res.map06_tmx,
     res.map07_tmx,
     res.map08_tmx,
     res.map09_tmx,
+
 
     res.demo_map00_tmx,
     res.demo_map01_tmx,

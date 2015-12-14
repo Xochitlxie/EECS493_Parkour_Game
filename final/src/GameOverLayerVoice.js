@@ -1,4 +1,4 @@
-var GameOverLayerVoice = cc.LayerColor.extend({
+var GameOverLayerVoice = cc.Layer.extend({
     // constructor
     ctor:function () {
         this._super();
@@ -25,6 +25,12 @@ var GameOverLayerVoice = cc.LayerColor.extend({
         var menu2 = new cc.Menu(menuItemReplay);
         menu2.setPosition(centerPos2);
         this.addChild(menu2);  
+        var distance = cc.Sprite.create("res/distance.png");
+        distance.attr({x: 730, y: 530});
+        var stars = cc.Sprite.create("res/stars.png");
+        stars.attr({x: 100, y: 495});
+        this.addChild(distance);       
+        this.addChild(stars); 
     },
     onRestart1:function (sender) {
 

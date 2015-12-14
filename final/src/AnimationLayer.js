@@ -38,119 +38,6 @@ var AnimationLayer = cc.Layer.extend({
 
     },
 
-    getCurrentPos:function(){
-
-        //if(animateStopForStar===1 && starFinished===0) return g_runnerStartX+250;
-
-        return this.sprite.getPositionX();
-    },
-
-    // avoid runner running out of screen
-    getEyeX:function () {
-        return this.getCurrentPos() - g_runnerStartX;
-    },
-
-    update: function() {
-        var statusLayer = this.getParent().getParent().getChildByTag(TagOfLayer.Status);
-        statusLayer.updateMeter(this.getCurrentPos() - g_runnerStartX);
-
-        // if(this.getCurrentPos()-g_runnerStartX >= 250 && animateStopForStar===0){
-        //     console.log("will stop soon");
-        //     this.stat = RunnerStat.stop;
-        //     animateStopForStar = 1;
-        // }
-
-        //in the update method of AnimationLayer
-        // check and update runner stat
-        var vel = this.body.getVel();
-        if (this.stat == RunnerStat.jumpUp) {
-            if (vel.y < 0.1) {
-                this.stat = RunnerStat.jumpDown;
-                this.sprite.stopAllActions();
-                this.sprite.runAction(this.jumpDownAction);
-            }
-        } else if (this.stat == RunnerStat.jumpDown) {
-            if (vel.y == 0) {
-                this.stat = RunnerStat.running;
-                this.sprite.stopAllActions();
-                this.sprite.runAction(this.runningAction);
-            }
-        }
-        // } else if (this.stat == RunnerStat.stop){
-        //     this.sprite.stopAllActions();
-        //     console.log("haha");
-        //     this.sprite.setPosition(new cc.Point(this.getCurrentPos(), g_groundHight));
-        //     //this.sprite.pause();
-        //     //this.runAction
-        //     //this.runningAction.release();
-        // }
-    },
-
-    jump:function () {
-       cc.log("jump");
-       if (this.stat == RunnerStat.running) {
-           this.body.applyImpulse(cp.v(0, 300), cp.v(0, 0));
-           this.stat = RunnerStat.jumpUp;
-           this.sprite.stopAllActions();
-           this.sprite.runAction(this.jumpUpAction);
-           //this.sprite.runAction(this.jumpDownAction);
-       }
-    },
-
-    accelerate: function() {
-      cc.log("accelerate");
-      this.body.applyImpulse(cp.v(2, 0), cp.v(0, 0));
-
-    },
-
-    // goOn:function(){
-    //     cc.log("will go on");
-
-    //     this.sprite.runAction(this.runningAction);
-    //     this.stat = RunnerStat.running;
-
-    //     starFinished = 1;
-    // },
-
-    initAction: function() {
-        // init runningAction
-        var animFrames = [];
-        for (var i = 1; i < 3; i++) {
-            var str = "run_Nana_mini_" + i + ".png";
-            var frame = cc.spriteFrameCache.getSpriteFrame(str);
-            animFrames.push(frame);
-        }
-
-        var animation = cc.Animation.create(animFrames, 0.1);
-        animation.setDelayPerUnit(1/14);
-        this.runningAction = cc.RepeatForever.create(cc.Animate.create(animation));
-        this.runningAction.retain();
-
-        // init jumpUpAction
-        animFrames = [];
-        for (var i = 1; i < 3; i++) {
-            var str = "run_Nana_mini" + i + ".png";
-            var frame = cc.spriteFrameCache.getSpriteFrame(str);
-            animFrames.push(frame);
-        }
-
-        animation = new cc.Animation.create(animFrames, 0.2);
-        this.jumpUpAction = cc.RepeatForever.create(cc.Animate.create(animation));
-        this.jumpUpAction.retain();
-
-        // init jumpDownAction
-        animFrames = [];
-        for (var i = 1; i < 3; i++) {
-            var str = "run_Nana_mini" + i + ".png";
-            var frame = cc.spriteFrameCache.getSpriteFrame(str);
-            animFrames.push(frame);
-        }
-
-        animation = new cc.Animation.create(animFrames, 0.3);
-        this.jumpDownAction = cc.RepeatForever.create(cc.Animate.create(animation));
-        this.jumpDownAction.retain();
-    },
-
     init:function () {
 
         this._super();
@@ -227,6 +114,94 @@ var AnimationLayer = cc.Layer.extend({
         // var actionTo = cc.MoveTo.create(2, cc.p(300, 85));
         // spriteRunner.runAction(cc.Sequence.create(actionTo));
         // this.addChild(spriteRunner);
+    },
+
+    initAction: function() {
+        // init runningAction
+        var animFrames = [];
+        for (var i = 1; i < 3; i++) {
+            var str = "run_Nana_mini_" + i + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            animFrames.push(frame);
+        }
+
+        var animation = cc.Animation.create(animFrames, 0.1);
+        animation.setDelayPerUnit(1/14);
+        this.runningAction = cc.RepeatForever.create(cc.Animate.create(animation));
+        this.runningAction.retain();
+
+        // init jumpUpAction
+        animFrames = [];
+        for (var i = 1; i < 3; i++) {
+            var str = "run_Nana_mini" + i + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            animFrames.push(frame);
+        }
+
+        animation = new cc.Animation.create(animFrames, 0.2);
+        this.jumpUpAction = cc.RepeatForever.create(cc.Animate.create(animation));
+        this.jumpUpAction.retain();
+
+        // init jumpDownAction
+        animFrames = [];
+        for (var i = 1; i < 3; i++) {
+            var str = "run_Nana_mini" + i + ".png";
+            var frame = cc.spriteFrameCache.getSpriteFrame(str);
+            animFrames.push(frame);
+        }
+
+        animation = new cc.Animation.create(animFrames, 0.3);
+        this.jumpDownAction = cc.RepeatForever.create(cc.Animate.create(animation));
+        this.jumpDownAction.retain();
+    },
+
+    getCurrentPos:function(){
+
+        return this.sprite.getPositionX();
+    },
+
+    // avoid runner running out of screen
+    getEyeX:function () {
+        return this.getCurrentPos() - g_runnerStartX;
+    },
+
+    update: function() {
+        var statusLayer = this.getParent().getParent().getChildByTag(TagOfLayer.Status);
+        statusLayer.updateMeter(this.getCurrentPos() - g_runnerStartX);
+
+        //in the update method of AnimationLayer
+        // check and update runner stat
+        var vel = this.body.getVel();
+        if (this.stat == RunnerStat.jumpUp) {
+            if (vel.y < 0.1) {
+                this.stat = RunnerStat.jumpDown;
+                this.sprite.stopAllActions();
+                this.sprite.runAction(this.jumpDownAction);
+            }
+        } else if (this.stat == RunnerStat.jumpDown) {
+            if (vel.y == 0) {
+                this.stat = RunnerStat.running;
+                this.sprite.stopAllActions();
+                this.sprite.runAction(this.runningAction);
+            }
+        }
+    },
+
+    jump:function () {
+       cc.log("jump");
+       if (this.stat == RunnerStat.running) {
+           this.body.applyImpulse(cp.v(0, 300), cp.v(0, 0));
+           this.stat = RunnerStat.jumpUp;
+           this.sprite.stopAllActions();
+           this.sprite.runAction(this.jumpUpAction);
+           //this.sprite.runAction(this.jumpDownAction);
+       }
+    },
+
+    accelerate: function() {
+      cc.log("accelerate");
+      this.body.applyImpulse(cp.v(2, 0), cp.v(0, 0));
+
     },
 
     onExit:function() {

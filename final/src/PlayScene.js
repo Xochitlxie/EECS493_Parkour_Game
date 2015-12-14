@@ -37,13 +37,22 @@ var PlayScene = cc.Scene.extend({
     },
 
     collisionRockBegin:function (arbiter, space) {
-        cc.log("==game over");
-        var animate = this.gameLayer.getChildByTag(TagOfLayer.Animation);
-        animate.body.applyForce(cp.v(0, 1800), cp.v(0, 0));
-		cc.audioEngine.stopMusic();
 
-		//cc.director.pause();
-        this.addChild(new GameOverLayerPlay());    
+    	if(this.getChildByTag(TagOfLayer.Status).getLeftLife()==1){
+    		cc.log("==game over");
+	        var animate = this.gameLayer.getChildByTag(TagOfLayer.Animation);
+	        animate.body.applyForce(cp.v(0, 1800), cp.v(0, 0));
+			cc.audioEngine.stopMusic();
+
+			//cc.director.pause();
+	        this.addChild(new GameOverLayerPlay());
+    	}
+    	else{
+    		cc.log("one more time yeah");
+    		this.getChildByTag(TagOfLayer.Status).decreaseLife();
+
+    		
+    	}  
     },
 
 

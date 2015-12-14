@@ -5,6 +5,7 @@ var flappyScene = cc.Scene.extend({
 	shapeToRemove : [],
 	gameLayer:null,
 	heart:null,
+	dead:false,
 
 	// init space of chipmunk
 	initPhysics : function() {
@@ -40,9 +41,12 @@ var flappyScene = cc.Scene.extend({
         var shapes = arbiter.getShapes();
         // shapes[0] is runner
         this.shapesToRemove.push(shapes[1]);
-		var statusLayer = this.getChildByTag(TagOfLayer.Status);
-		statusLayer.addCoin(1);
 
+        if(!this.dead){
+        	var statusLayer = this.getChildByTag(TagOfLayer.Status);
+			statusLayer.addCoin(1);
+        }
+		
 		cc.audioEngine.playEffect(res.pickup_coin_wav);
 
     },
@@ -50,13 +54,16 @@ var flappyScene = cc.Scene.extend({
     collisionRockBegin:function (arbiter, space) {
 
     	if(this.getChildByTag(TagOfLayer.Status).getLeftLife()==1){
+    		
     		cc.log("==game over");
+
+    		this.dead = true;
 	        var animate = this.gameLayer.getChildByTag(TagOfLayer.Animation);
 	        animate.body.applyForce(cp.v(0, 1800), cp.v(0, 0));
 			cc.audioEngine.stopMusic();
 
 			//cc.director.pause();
-	        this.addChild(new GameOverLayerPlay());
+	        this.addChild(new GameOverLayerFlappy());
     	}
     	else{
     		

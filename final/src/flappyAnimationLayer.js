@@ -114,8 +114,12 @@ var flappyAnimationLayer = cc.Layer.extend({
 
 
 	update: function() {
-		var statusLayer = this.getParent().getParent().getChildByTag(TagOfLayer.Status);
-		statusLayer.updateMeter(this.getCurrentPos() - g_runnerStartX);
+
+        if(!this.getParent().getParent().dead){
+            var statusLayer = this.getParent().getParent().getChildByTag(TagOfLayer.Status);
+            statusLayer.updateMeter(this.getCurrentPos() - g_runnerStartX);
+        }
+		
 
         // if(this.getCurrentPos()-g_runnerStartX >= 250 && animateStopForStar===0){
         //     console.log("will stop soon");

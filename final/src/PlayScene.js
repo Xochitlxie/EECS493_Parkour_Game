@@ -4,6 +4,7 @@ var PlayScene = cc.Scene.extend({
 	shapeToRemove : [],
 	gameLayer:null,
 	heart:null,
+	dead:false,
 
 	// init space of chipmunk
 	initPhysics : function() {
@@ -30,8 +31,10 @@ var PlayScene = cc.Scene.extend({
         var shapes = arbiter.getShapes();
         // shapes[0] is runner
         this.shapesToRemove.push(shapes[1]);
-		var statusLayer = this.getChildByTag(TagOfLayer.Status);
-		statusLayer.addCoin(1);
+        if(!this.dead){
+        	var statusLayer = this.getChildByTag(TagOfLayer.Status);
+			statusLayer.addCoin(1);
+        }
 		
 		cc.audioEngine.playEffect(res.pickup_coin_wav);
 		
@@ -40,7 +43,10 @@ var PlayScene = cc.Scene.extend({
     collisionRockBegin:function (arbiter, space) {
 
     	if(this.getChildByTag(TagOfLayer.Status).getLeftLife()==1){
-    		cc.log("==game over");
+
+    		cc.log("game over");
+
+    		this.dead = true;
 	        var animate = this.gameLayer.getChildByTag(TagOfLayer.Animation);
 	        animate.body.applyForce(cp.v(0, 1800), cp.v(0, 0));
 			cc.audioEngine.stopMusic();

@@ -68,7 +68,7 @@ var demoScene = cc.Scene.extend({
 		this.gameLayer.addChild(new demoBackgroundLayer(this.space), 0, TagOfLayer.background);
 	    this.gameLayer.addChild(new demoAnimationLayer(this.space), 0, TagOfLayer.Animation);
 	    this.addChild(this.gameLayer);
-	    this.addChild(new StatusLayer(), 0, TagOfLayer.Status);
+	    this.addChild(new demoStatusLayer(), 0, TagOfLayer.Status);
 
 		
 		// this.addChild(new BackgroundLayer());

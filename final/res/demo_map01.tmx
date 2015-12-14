@@ -9,7 +9,7 @@
   </data>
  </layer>
  <objectgroup name="rock">
-  <object id="35" x="945" y="561"/>
+  <object id="35" x="947" y="544"/>
  </objectgroup>
  <objectgroup name="coin">
   <object id="37" x="343" y="368"/>

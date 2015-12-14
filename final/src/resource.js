@@ -10,6 +10,7 @@ var res = {
     demo_png : "res/button2.png",
     voice_png : "res/button3.png",
     flappy_png : "res/button4.png",
+    heart_png : "res/heart.png",
 
 	background_ogg : "res/background.ogg",
 
@@ -78,6 +79,7 @@ var g_resources = [
     res.map08_tmx,
     res.map09_tmx,
 
+    res.heart_png,
 
     res.demo_map00_tmx,
     res.demo_map01_tmx,

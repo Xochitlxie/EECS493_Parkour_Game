@@ -4,6 +4,7 @@ var flappyScene = cc.Scene.extend({
 	space:null,
 	shapeToRemove : [],
 	gameLayer:null,
+	heart:null,
 
 	// init space of chipmunk
 	initPhysics : function() {
@@ -58,8 +59,20 @@ var flappyScene = cc.Scene.extend({
 	        this.addChild(new GameOverLayerPlay());
     	}
     	else{
-    		cc.log("one more time yeah");
+    		
+			cc.log("one more time yeah");
     		this.getChildByTag(TagOfLayer.Status).decreaseLife();
+
+    		this.heart = cc.Sprite.create("res/heart.png");
+    		var animate = this.gameLayer.getChildByTag(TagOfLayer.Animation);
+
+    		var winsize = cc.director.getWinSize();
+
+            this.heart.attr({x: winsize.width/4, y: 200});
+
+            var actionTo = cc.MoveTo.create(3, cc.p(winsize.width/4, 900));
+        	this.heart.runAction(cc.Sequence.create(actionTo));
+        	this.addChild(this.heart, 0, 520);
 
     	}
     },

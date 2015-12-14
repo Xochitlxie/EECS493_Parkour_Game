@@ -6,7 +6,7 @@ var voiceStatusLayer = cc.Layer.extend({
     coins:0,
     count:0,
     acc_sta:false,
-    lifeLeft:2,
+    lifeLeft:3,
 
     ctor:function () {
         this._super();

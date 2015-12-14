@@ -27,6 +27,7 @@
         "src/demoScene.js",
         "src/demoBackgroundLayer.js",
         "src/demoAnimationLayer.js",
+        "src/demoStatusLayer.js",
         "src/flappyScene.js",
         "src/flappyAnimationLayer.js",
         "src/flappyStatusLayer.js",

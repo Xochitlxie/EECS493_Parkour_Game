@@ -1,12 +1,12 @@
 
-var flappyStatusLayer = cc.Layer.extend({
+var demoStatusLayer = cc.Layer.extend({
 
     labelCoin:null,
     labelMeter:null,
     coins:0,
-    acc_sta: false,
     count:0,
-    lifeLeft:3,
+    acc_sta:false,
+    lifeLeft:1,
 
     ctor:function () {
         this._super();
@@ -23,7 +23,7 @@ var flappyStatusLayer = cc.Layer.extend({
         this.labelCoin.setPosition(cc.p(70, winsize.height - 20));
         this.addChild(this.labelCoin);
 
-        this.labelLife = cc.LabelTTF.create("Life Left: 2", "Helvetica", 20);
+        this.labelLife = cc.LabelTTF.create("Life Left: 1", "Helvetica", 20);
         this.labelLife.setColor(cc.color(255,0,0));
         this.labelLife.setPosition(cc.p(250, winsize.height - 20));
         this.addChild(this.labelLife);
@@ -33,17 +33,17 @@ var flappyStatusLayer = cc.Layer.extend({
         this.addChild(this.labelMeter);
     },
 
-	updateMeter:function (px) {
-        this.labelMeter.setString( parseInt(px / 10) + "M");
-		var distance = parseInt(px / 10);
-    if (distance % 500 > 490 ) this.acc_sta = true;
-		if (distance < 99999 && this.acc_sta  && this.count < 100) {
-      this.count = this.count + 1;
-      if (this.count == 20) this.acc_sta = false;
-		  var event = new cc.EventCustom("accelerate");
-			cc.eventManager.dispatchEvent(event);
-	   }
-	},
+    updateMeter:function (px) {
+      this.labelMeter.setString( parseInt(px / 10) + "M");
+  		var distance = parseInt(px / 10);
+      if (distance % 250 > 240 ) this.acc_sta = true;
+  		if (distance < 99999 && this.acc_sta  && this.count < 100) {
+        this.count = this.count + 1;
+        if (this.count == 20) this.acc_sta = false;
+  		  var event = new cc.EventCustom("accelerate");
+  			cc.eventManager.dispatchEvent(event);
+  	   }
+  	},
 
     decreaseLife:function(){
       this.lifeLeft = this.lifeLeft - 1;
@@ -55,8 +55,8 @@ var flappyStatusLayer = cc.Layer.extend({
       return this.lifeLeft;
     },
 
-	addCoin:function (num) {
+    addCoin:function (num) {
         this.coins += num;
         this.labelCoin.setString("Stars:" + this.coins);
-	}
+    }
 });

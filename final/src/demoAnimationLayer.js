@@ -136,7 +136,7 @@ var demoAnimationLayer = cc.Layer.extend({
                 var distanceTag = cc.Sprite.create("res/distance.png");
                 distanceTag.attr({x: 4030, y: 530});
                 var starsTag = cc.Sprite.create("res/stars.png");
-                starsTag.attr({x: 3400, y: 470});
+                starsTag.attr({x: 3400, y: 495});
                 this.addChild(distanceTag, 0, tutorialTag.status1);       
                 this.addChild(starsTag, 0, tutorialTag.status2); 
                 statusTagAdded = 1;  

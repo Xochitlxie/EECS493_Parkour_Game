@@ -15,8 +15,8 @@ var MenuLayer = cc.Layer.extend({
         var centerpos = cc.p(winsize.width/2, winsize.height / 2);
         var basepos = cc.p(winsize.width * 1.4 /2, winsize.height * 0.95 /2);
         var demoPos = cc.p(winsize.width * 1.4 /2, winsize.height * 1.28 /2);
-        var flappyPos = cc.p(winsize.width * 1.4 /2, winsize.height * 0.62 / 2);
-        var voicePos = cc.p(winsize.width * 1.4 /2, winsize.height * 0.25 / 2);
+        var voicePos = cc.p(winsize.width * 1.4 /2, winsize.height * 0.62 / 2);
+        var flappyPos = cc.p(winsize.width * 1.4 /2, winsize.height * 0.25 / 2);
         var titlepos = cc.p(winsize.width * 0.5 / 2, winsize.height * 1.7 / 2);
      
         //4. create a background image and set it's position at the center of the screen

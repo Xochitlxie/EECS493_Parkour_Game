@@ -62,6 +62,7 @@ var flappyScene = cc.Scene.extend({
 	        animate.body.applyForce(cp.v(0, 1800), cp.v(0, 0));
 			cc.audioEngine.stopMusic();
 
+			this.getChildByTag(TagOfLayer.Status).decreaseLife();
 			//cc.director.pause();
 	        this.addChild(new GameOverLayerFlappy());
     	}

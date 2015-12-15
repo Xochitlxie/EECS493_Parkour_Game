@@ -51,6 +51,8 @@ var demoScene = cc.Scene.extend({
 		cc.audioEngine.stopMusic();
 
 		cc.director.pause();
+
+		this.getChildByTag(TagOfLayer.Status).decreaseLife();
         this.addChild(new GameOverLayerDemo());    
     },
 

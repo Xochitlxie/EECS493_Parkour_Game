@@ -47,6 +47,7 @@ var voiceStatusLayer = cc.Layer.extend({
 
     decreaseLife:function(){
       this.lifeLeft = this.lifeLeft - 1;
+      if(this.lifeLeft<0) this.lifeLeft=0;
       this.labelLife.setString("Life Left: " + this.lifeLeft);
       
     },

@@ -32,14 +32,19 @@ var GameOverLayerPlay = cc.Layer.extend({
         this.addChild(distance);       
         this.addChild(stars); 
 
-
-        // var numCoin = this.getParent().getChildByTag(TagOfLayer.Status).coins;
-        // console.log(numCoin);
     },
+
+    onEnter:function(){
+        var numCoin = this.getParent().getChildByTag(TagOfLayer.Status).coins;
+        console.log(numCoin);
+    },
+
     onRestart1:function (sender) {
 
         cc.director.resume();
         cc.director.runScene(new MenuScene());
+
+        
     },
     onRestart2:function (sender) {
 

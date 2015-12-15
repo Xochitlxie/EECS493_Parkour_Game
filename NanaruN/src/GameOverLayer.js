@@ -17,9 +17,16 @@ var GameOverLayer = cc.LayerColor.extend({
         var menu = new cc.Menu(menuItemRestart);
         menu.setPosition(centerPos);
         this.addChild(menu);
+
+        var numCoin = this.getParent().getChildByTag(TagOfLayer.Status).coins;
+        console.log(numCoin);
+
     },
     onRestart:function (sender) {
-
+        console.log("fadsf");
+        var numCoin = this.getParent().getChildByTag(TagOfLayer.Status).coins;
+        console.log(numCoin);
+        
         cc.director.resume();
         cc.director.runScene(new MenuScene());
     }

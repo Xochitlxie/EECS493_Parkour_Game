@@ -23,7 +23,7 @@ var StatusLayer = cc.Layer.extend({
         this.labelCoin.setPosition(cc.p(70, winsize.height - 20));
         this.addChild(this.labelCoin);
 
-        this.labelLife = cc.LabelTTF.create("Life Left: 2", "Helvetica", 20);
+        this.labelLife = cc.LabelTTF.create("Life Left: 3", "Helvetica", 20);
         this.labelLife.setColor(cc.color(255,0,0));
         this.labelLife.setPosition(cc.p(250, winsize.height - 20));
         this.addChild(this.labelLife);
@@ -47,7 +47,9 @@ var StatusLayer = cc.Layer.extend({
 
     decreaseLife:function(){
       this.lifeLeft = this.lifeLeft - 1;
-      if(this.lifeLeft<0) this.lifeLeft=0;
+      if(this.lifeLeft<0){
+        this.lifeLeft=0;
+      } 
       this.labelLife.setString("Life Left: " + this.lifeLeft);
       
     },

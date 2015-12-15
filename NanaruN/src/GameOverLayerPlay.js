@@ -31,6 +31,10 @@ var GameOverLayerPlay = cc.Layer.extend({
         stars.attr({x: 100, y: 495});
         this.addChild(distance);       
         this.addChild(stars); 
+
+
+        // var numCoin = this.getParent().getChildByTag(TagOfLayer.Status).coins;
+        // console.log(numCoin);
     },
     onRestart1:function (sender) {
 

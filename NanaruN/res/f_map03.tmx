@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="56" height="18" tilewidth="32" tileheight="32" nextobjectid="47">
+ <tileset firstgid="1" name="background2" tilewidth="32" tileheight="32" tilecount="1140">
+  <image source="background2.png" width="1846" height="667"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="56" height="18">
+  <data encoding="base64" compression="zlib">
+   eJzd1gMSIAgCA8Cxbdu2bdu2bdu2bdu2bXt3bPt6v3Gp9BuSAAH+vxOIwAQhKMEITghCEorQhCEs4QhPBCISichEISrRiE4MYhKL2MQhLvGITwISkojEJCEpyUhOClKSitSkIS3pSE8GMpKJzGQhK9nITg5ykps85CUf+SlAQQpRmCIUpRjFKUFJSlGaMpSlHOWpQEUqUZkqVKUa1alBTWpRmzrUpR71aUBDGtGYJjSlGc1pQUta0Zo2tKUd7elARzrRha50ozs96EkvetOHvvSjPwMYyCAGM4ShDGM4IxjJKEYzhrGMYzwTmMgkJjOFqUxjOjOYySxmM4e5zGM+C1jIIhazhKUsYzkrWMkqVrOWdaxnAxvZxGa2sJVtbGcHO9nFbvawl33s5wAHOcRhjnCUYxznBCc5xWnOcJZznOcCF7nEZa5wlWtc5wY3ucVt7nCXe9znAQ95xGOe8C9PecZzXvCSV7zmDW95x3s+8JFPfOYLX/nGd37wk1/85g9/CRBQCURgghCUYAQnBCEJRWjCEJZwhCcCEYlEZKIQlWhEJwYxiUVs4hCX+CQgIYlITBKSkozkpCAlqUhNGtKSjvRkICOZyEwWspKN7OQgJ7nITR7yko/8FKAghShMEYpSjOKUoCSlKE0ZylKO8lSgIpWoTBWqUo0a1KQWtalDXepRnwY0pBGNaUJTmtGcFrSkFa1pQ1va0Z4OdKQTnelCV7rRnR70pBe96UNf+tGfAQxkEIMZwlCGMZwRjGQUoxnDWMYxnolMYjJTmMo0pjODmcxiNnOYyzzms4CFLGIxS1jKMpazgpWsYjVrWMs61rOBjWxiM1vYyja2s4Od7GI3e9jLPvZzgIMc4jBHOMoxjnOCU5zmDGc5x3kucJFLXOYKV7nGdW5wk1vc5g53ucd9HvCQRzzmCf/wL095xnNe8JJXvOYNb3nHez7wkU985gtf+cZ3fvCTX/zmD3/5b9gDEpggBCUYwQlBSEIRmjCEJRzhiUBEIhGZKEQlGtGJQUxiEZs4xCUe8UlAQhKRmCQkJRnJSUFKUpGaNKQlHenJQEYykZksZCUb2clBTnKRh7zkIz8FKEghClOEohSjOCUoSSlKU4aylKM8FahIJSpThapUozo1qEktalOHutSjPg1oSCMa04SmNKM5LWhJK1rThra0oz0d6EgnOtOVbnSnBz3pRW/60Jd+9GcAAxnEYIYwlGEMZwQjGcVoxjCWcYxnAhOZxGSmMJVpTGcGM5nFbOYwl3nMZwELWcRilrCUZSxnBStZxWrWsI71bGAjm9jMFrayje3sYCe72M0e9rKP/RzgIIc4zBGOcozjnOAkpzjNGc5yjvNc4CKXuMwVrnKN69zgJre4zR3uco/7POAhj3jME/7hKc94zgte8orXvOEt73jPBz7yic984Svf+M4PfvKL3/zhL/8d+IAEIjBBCEowghOCkIQiNGEISzjCE4GIRCIyUYhKNKITg5jEIjZxiEs8EpCQRCQmCUlJRnJSkJJUpCYNaUlHejKQkUxkJgtZyUZ2cpCTXOQmD3nJR34KUJBCFKYIRSlGcUpQklKUpgxlKUd5KlCRSlSmClWpRnVqUova1KEu9ahPAxrSiMY0oSnNaE4LWtKK1rShLe1oTwc60onOdKEr3ehOD3rSi970oS/96M8ABjKIwQxhKMMYzghGMorRjGEs4xjPBCYxmSlMZRrTmcFMZjGbOcxlHvNZwEIWsZglLGUZy1nBSlaxmjWsZR3r2cBGNrGZLWxlG9vZwU52sZs97GUf+znAQQ5xmCMc5RjHOcFJ/gfkO8vL
+  </data>
+ </layer>
+ <objectgroup name="f_rock">
+  <object id="5" x="480" y="496"/>
+  <object id="6" x="480" y="463"/>
+  <object id="7" x="481" y="62"/>
+  <object id="8" x="482" y="95"/>
+  <object id="9" x="633" y="378"/>
+  <object id="10" x="634" y="413"/>
+  <object id="11" x="634" y="446"/>
+  <object id="12" x="635" y="481"/>
+  <object id="13" x="632" y="71"/>
+  <object id="14" x="632" y="109"/>
+  <object id="15" x="631" y="146"/>
+  <object id="16" x="836" y="553"/>
+  <object id="17" x="836" y="519"/>
+  <object id="18" x="836" y="484"/>
+  <object id="19" x="836" y="157"/>
+  <object id="20" x="836" y="191"/>
+  <object id="21" x="1045" y="86"/>
+  <object id="22" x="1045" y="121"/>
+  <object id="23" x="1045" y="157"/>
+  <object id="24" x="1184" y="392"/>
+  <object id="25" x="1184" y="426"/>
+  <object id="26" x="1185" y="459"/>
+  <object id="27" x="1324" y="94"/>
+  <object id="28" x="1325" y="125"/>
+  <object id="29" x="1325" y="158"/>
+  <object id="30" x="1589" y="372"/>
+  <object id="31" x="1589" y="404"/>
+  <object id="32" x="1590" y="439"/>
+  <object id="33" x="1590" y="472"/>
+  <object id="34" x="1590" y="73"/>
+  <object id="35" x="1590" y="110"/>
+ </objectgroup>
+ <objectgroup name="f_coin">
+  <object id="1" x="347" y="181"/>
+  <object id="2" x="348" y="402"/>
+  <object id="36" x="471" y="232"/>
+  <object id="37" x="567" y="291"/>
+  <object id="38" x="749" y="246"/>
+  <object id="39" x="811" y="365"/>
+  <object id="40" x="954" y="349"/>
+  <object id="41" x="1073" y="447"/>
+  <object id="42" x="1179" y="232"/>
+  <object id="43" x="1349" y="299"/>
+  <object id="44" x="1475" y="353"/>
+  <object id="45" x="1585" y="218"/>
+  <object id="46" x="1714" y="288"/>
+ </objectgroup>
+</map>

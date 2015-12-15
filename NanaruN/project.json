@@ -2,16 +2,41 @@
     "project_type": "javascript",
 
     "debugMode" : 1,
-    "showFPS" : true,
+    "showFPS" : false,
     "frameRate" : 60,
     "id" : "gameCanvas",
     "renderMode" : 0,
     "engineDir":"frameworks/cocos2d-html5",
 
-    "modules" : ["cocos2d", "cocostudio"],
+    "modules" : ["cocos2d", "cocostudio", "chipmunk"],
 
     "jsList" : [
         "src/resource.js",
-        "src/app.js"
+        "src/app.js",
+        "src/AnimationLayer.js",
+        "src/BackgroundLayer.js",
+        "src/PlayScene.js",
+        "src/StatusLayer.js",
+        "src/globals.js",
+        "src/coin.js",
+        "src/rock.js",
+        "src/GameOverLayerPlay.js",
+        "src/GameOverLayerVoice.js",
+        "src/GameOverLayerFlappy.js",
+        "src/GameOverLayerDemo.js",
+        "src/demoScene.js",
+        "src/demoBackgroundLayer.js",
+        "src/demoAnimationLayer.js",
+        "src/demoStatusLayer.js",
+        "src/flappyScene.js",
+        "src/flappyAnimationLayer.js",
+        "src/flappyStatusLayer.js",
+        "src/flappyBgrLayer.js",
+        "src/f_coin.js",
+        "src/f_rock.js",
+        "src/voiceScene.js",
+        "src/voiceAnimationLayer.js",
+        "src/voiceStatusLayer.js"
+
     ]
 }

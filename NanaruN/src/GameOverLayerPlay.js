@@ -34,10 +34,10 @@ var GameOverLayerPlay = cc.Layer.extend({
 
     },
 
-    onEnter:function(){
-        var numCoin = this.getParent().getChildByTag(TagOfLayer.Status).coins;
-        console.log(numCoin);
-    },
+    // onEnter:function(){
+    //     var numCoin = this.getParent().getChildByTag(TagOfLayer.Status).coins;
+    //     console.log(numCoin);
+    // },
 
     onRestart1:function (sender) {
 
